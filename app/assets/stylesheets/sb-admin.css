@@ -261,3 +261,25 @@ ul.alert-dropdown {
     left: 50%;
 }
 
+
+.list-img-wrapper{
+    margin: 3px;
+    height: 150px; 
+    width: 150px; 
+    overflow: hidden;
+    float: left ;
+    border-radius: 15%;
+}
+
+.list-item-img{
+    width: 100%;
+    height: 100%;
+}
+
+.list-info-wrapper{
+    margin: 3px;
+    width: calc(100% - 175px);
+    display: inline-block;
+    padding-left: 1em;
+    float: right;
+}

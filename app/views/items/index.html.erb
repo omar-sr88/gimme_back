@@ -1,0 +1,69 @@
+<% content_for :subtitle do %>
+   Todos os items <!-- check filter variable -->
+<% end %>
+    <div class="container-fluid">
+        <!-- Page Heading -->
+
+        <div class="row">
+          <div class="col-lg-12">
+            <% @items.each do |item| %>     
+            <div class="panel panel-default">
+                  <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-book"></i>  <%= item.name %></h3>
+                  </div>
+                 
+                <div class="panel-body">
+                  <div class="list-img-wrapper">
+                    <%= image_tag('no-image', class: 'list-item-img')  %>
+                  </div>
+
+                  <div class="list-info-wrapper">
+                    <p>
+                      <strong>O que que é? Como tava?</strong>
+                      <%= item.description %>.
+                    </p>
+
+                    <p>
+                      <strong>Quando?</strong>
+                      <%= item.date_lended.to_s(:item) %>
+                    </p>
+                    <p>
+                      <strong>E a data pra devolver?</strong>
+                      <%= item.initial_return_date.to_s(:item) %>
+                    </p>
+
+                   <div class="progress">
+                      <div class="progress-bar 
+                      <% if item.days_left < 0 %> 
+                        progress-bar-danger
+                      <%elsif item.days_left == 0 %>
+                        progress-bar-warning
+                      <%end%> progress-bar-success" role="progressbar" 
+                      aria-valuenow="<%=  item.progress  %>." 
+                      aria-valuemin="0" 
+                      aria-valuemax="100" 
+                      style="width:<%= item.progress %>%;">
+                      <% if item.days_left == 0 %>
+                        É Hoje! Vai atrás mermão!
+                      <%  elsif  item.days_left < 0 %>
+                       Xi jão, te deram o guela
+                       <%else %>
+                        Faltam <%= item.days_left %>
+                      <% end%>
+                      
+                      </div>
+                   </div>
+                    <%= link_to 'Show', item %>
+                    <%= link_to 'Edit', edit_item_path(item) %>
+                  </div>
+                </div>
+              </div>    
+              <% end %>
+            </div>
+          </div>
+        <!-- /.row -->
+
+        <div class="row">                    
+        </div>    <!-- /.row -->
+  </div>        <!-- /.container-fluid -->
+

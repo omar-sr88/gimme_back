@@ -1,0 +1,37 @@
+<% content_for :subtitle do %>
+   Detalhe Item <!-- check filter variable -->
+<% end %>
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+
+        <div class="row">
+        	<div class="col-lg-12">
+	        	<div class="panel panel-default">
+	                <div class="panel-heading">
+	                    <h3 class="panel-title"><i class="fa fa-book"></i>  <%= @item.name %></h3>
+	                </div>
+	                   
+					<div class="panel-body">
+			    	<p id="notice"><%= notice %></p>
+						<p>
+						  <strong>O que que é? Como tava?:</strong>
+						  <%= @item.description %>. 
+						</p>
+
+						<p>
+						  <strong>Quando:</strong>
+						  <%= @item.date_lended %>
+						</p>
+
+						<%= link_to 'Edit', edit_item_path(@item) %> |
+						<%= link_to 'Back', items_path %>
+					</div>
+	            </div>		
+        	</div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">                    
+        </div>    <!-- /.row -->
+	</div>        <!-- /.container-fluid -->
