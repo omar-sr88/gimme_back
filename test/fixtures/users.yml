@@ -2,10 +2,12 @@
 
 one:
   name: MyString
-  description: MyString
-  date_lended: 2016-08-02 09:04:30
+  email: MyString
+  nick: MyString
+  super: 
 
 two:
   name: MyString
-  description: MyString
-  date_lended: 2016-08-02 09:04:30
+  email: MyString
+  nick: MyString
+  super: 

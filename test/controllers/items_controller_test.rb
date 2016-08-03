@@ -5,24 +5,6 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     @item = items(:one)
   end
 
-  test "should get index" do
-    get items_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_item_url
-    assert_response :success
-  end
-
-  test "should create item" do
-    assert_difference('Item.count') do
-      post items_url, params: { item: { date: @item.date, description: @item.description, name: @item.name } }
-    end
-
-    assert_redirected_to item_url(Item.last)
-  end
-
   test "should show item" do
     get item_url(@item)
     assert_response :success
@@ -34,7 +16,7 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update item" do
-    patch item_url(@item), params: { item: { date: @item.date, description: @item.description, name: @item.name } }
+    patch item_url(@item), params: { item: { date_lended: @item.date_lended, description: @item.description, name: @item.name } }
     assert_redirected_to item_url(@item)
   end
 
