@@ -31,6 +31,8 @@ gem 'coffee-script-source', '1.8.0'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem "font-awesome-rails"
 
+gem 'bcrypt', '~> 3.1', '>= 3.1.11'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
