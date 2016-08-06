@@ -13,8 +13,11 @@
   		<%= render "shared/nav" %>
 		  <div id="page-wrapper">
         <%= render "shared/page_header" %>
-
-    		<%= yield %>	
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+    		<%= yield %>
+         <%= debug(params) if Rails.env.development? %>
   		</div>
   	</div>
 

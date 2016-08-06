@@ -283,3 +283,49 @@ ul.alert-dropdown {
     padding-left: 1em;
     float: right;
 }
+
+
+/*verify later*/
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+input {
+  height: auto !important;
+}
+
+ #error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+
+#login-wrapper{
+} 
+.signup-form{
+    background-color:white; 
+    width: calc(50% - 1px);
+    margin: auto;
+    margin-top: 20%;
+    border-radius: 1%;
+    padding: 1em;
+}
+
+
+.login-form{
+    display:none;
+    background-color:white; 
+    width: calc(50% - 1px);
+    margin: auto;
+    margin-top: 20%;
+    border-radius: 1%;
+    padding: 1em;
+}

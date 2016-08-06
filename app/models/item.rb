@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
+ 
+	belongs_to :user, :class_name => "User"
+    belongs_to :recipient, :class_name => "User"
 
 	attr_accessor :days_left
 	attr_accessor :progress
