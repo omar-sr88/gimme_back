@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  layout "login"
   def new
   end
 
@@ -15,5 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    log_out
+    redirect_to 'new'
   end
 end

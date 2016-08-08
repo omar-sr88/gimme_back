@@ -21,20 +21,5 @@
 		    <% end %>
 	  </div>
 	</div>
-</div>
-
-<div class="login-form">
-	<div class="row">
-	  <div class="col-md-6 col-md-offset-3">
-	        <%= form_for(:sessions, url: login_path) do |f| %>
-	          <%= f.label :email %>
-		      <%= f.email_field :email, class: 'form-control' %>
-
-		      <%= f.label :password %>
-		      <%= f.password_field :password, class: 'form-control' %>
-
-		      <%= f.submit "Log in", class: "btn btn-primary" %>
-		    <% end %>
-	  </div>
-	</div>
+	<div class="log-sign-switch row"><%= link_to "<button>Already a user? Log in</button>".html_safe, login_path, :id => "go-signup" %>
 </div>

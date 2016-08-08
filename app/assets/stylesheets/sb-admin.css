@@ -321,11 +321,19 @@ input {
 
 
 .login-form{
-    display:none;
+
     background-color:white; 
     width: calc(50% - 1px);
     margin: auto;
     margin-top: 20%;
     border-radius: 1%;
     padding: 1em;
+}
+
+.log-sign-switch{
+    padding: 5px;
+
+    button {
+        float: right;
+    }
 }
