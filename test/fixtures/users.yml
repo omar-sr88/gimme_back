@@ -1,6 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 omar:
-  name: Omar Ramalho
+  name: Omar S R
   email: omar.sr88@gmail.com
   password_digest: <%= User.digest('omar123') %>
+  super: true
+
+archer:
+  name: Sterling Archer
+  email: duchess@example.gov
+  password_digest: <%= User.digest('password') %>
