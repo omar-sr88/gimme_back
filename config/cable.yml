@@ -3,6 +3,7 @@ development:
 
 test:
   adapter: async
+  url: http://localhost/
 
 production:
   adapter: redis

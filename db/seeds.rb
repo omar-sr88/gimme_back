@@ -10,7 +10,9 @@ User.create!(name:  "Omar Ramalho",
              email: "omar.sr88@gmail.com",
              password:              "omar123",
              password_confirmation: "omar123",
-             super: true)
+             super: true,
+             activated: true,
+             activated_at: Time.zone.now)
 
 
 Item.create([{name: 'Livro Magic',
@@ -30,5 +32,7 @@ Item.create([{name: 'Livro Magic',
   User.create!(name:  name,
                email: email,
                password:              password,
-               password_confirmation: password)
+               password_confirmation: password,
+               activated: true,
+              activated_at: Time.zone.now)
 end
