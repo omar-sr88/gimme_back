@@ -5,7 +5,8 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all_with_progress
+    #param for all, mine, others
+    @items = Item.set_progress(@current_user,params[:flag])
   end
 
   # GET /items/1
@@ -27,7 +28,6 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
-
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }

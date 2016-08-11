@@ -5,7 +5,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @user       = users(:omar)
-    @other_user = users(:archer)
+    @other_user = users(:other)
   end
 
   test "should redirect edit when logged in as wrong user" do

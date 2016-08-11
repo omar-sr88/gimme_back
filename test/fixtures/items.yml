@@ -1,7 +1,24 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyString
-  date_lended: 2016-08-02 09:04:30
+  name: Livro Magic
+  description: "Guia de alara,novinho, sem nada de mais"
+  date_lended: 11/01/2014 13:23
+  initial_return_date: 12/01/2014
+  owner_id: 1 
+  recipient_id: 2
+two:
+  name:  Isqueiro
+  description: "Novinho, com marcel, nao volta mais"
+  date_lended: 04/01/2016 13:23
+  initial_return_date: 05/01/2016
+  owner_id: 1 
+  recipient_id: 2
 
+three:
+  name: Rock band
+  description: "Bateria, microfone a porra toda com antonio"
+  date_lended: 1/01/2016 13:23
+  initial_return_date: 2/01/2016
+  owner_id: 2
+  recipient_id: 1

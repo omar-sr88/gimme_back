@@ -19,10 +19,16 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_template 'users/edit'
   end
 
-
+  #stuck because of standrd www.example.com host
   test "successful edit with friendly forwarding" do
+    delete logout_path
+    assert_not is_logged_in?
     get edit_user_path(@user)
-    #log_in_as(@user)
+    assert_redirected_to login_path
+    post login_path, params: { session: { email: @user.email,
+                                          password: "omar123",
+                                          remember_me: 1 } }
+    #assert_redirected_to user_path(@user)
     assert_redirected_to edit_user_path(@user)
     name  = "Foo Bar"
     email = "foo@bar.com"

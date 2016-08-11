@@ -1,6 +1,6 @@
-<% content_for :subtitle do %>
-   Todos os items <!-- check filter variable -->
-<% end %>
+<% provide(:title, "Items List") %>
+<% provide(:subtitle, "All items") %>
+
     <div class="container-fluid">
         <!-- Page Heading -->
 
@@ -53,8 +53,8 @@
                       
                       </div>
                    </div>
-                    <%= link_to 'Show', item %>
-                    <%= link_to 'Edit', edit_item_path(item) %>
+                    <%= link_to 'Show', item , :class => "btn btn-sm btn-primary" %>
+                    <%= link_to 'Edit', edit_item_path(item), :class => "btn btn-sm btn-info" %>
                   </div>
                 </div>
               </div>    

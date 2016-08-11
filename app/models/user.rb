@@ -1,7 +1,9 @@
 class User < ApplicationRecord
 
+  #todo create user soft delete feature
+
 	attr_accessor :remember_token, :activation_token, :reset_token
-	has_many :items
+
 	before_save :downcase_email #{ self.email = email.downcase }
 	before_create :create_activation_digest
 	validates :name, presence: true , length: { maximum: 50 }
@@ -10,6 +12,9 @@ class User < ApplicationRecord
 	            
 	has_secure_password              
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+  has_many :owned_items, :class_name => 'Items', :foreign_key => 'owner_id'
+  has_many :received_items, :class_name => 'Items', :foreign_key => 'recipient_id'
 
 
 	# Returns the hash digest of the given string.
@@ -60,6 +65,10 @@ class User < ApplicationRecord
 
   def password_reset_expired?
     reset_sent_at < 24.hours.ago
+  end
+
+  def set_updated_password
+    update_attribute(:updated_since_sent, true)
   end
 
   private

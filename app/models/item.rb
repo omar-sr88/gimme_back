@@ -1,14 +1,23 @@
 class Item < ApplicationRecord
  
-	belongs_to :user, :class_name => "User"
+	belongs_to :owner,  :class_name => "User"
     belongs_to :recipient, :class_name => "User"
+    validates  :owner_id, :recipient_id, presence: true
+    validates  :name, presence: true, length: { maximum: 30 }
 
 	attr_accessor :days_left
 	attr_accessor :progress
 
 
-	def self.all_with_progress
-		items = Item.all
+	def Item.set_progress(user,flag)
+		case flag
+		when 'mine'
+		  items = user.owned_items
+		when 'others'
+		  items = user.received_items
+		else
+  		  items = Item.all
+		end
 
 		items.each do |item|
 			total = item.days_to_return(item.date_lended, item.initial_return_date) 
@@ -20,9 +29,7 @@ class Item < ApplicationRecord
 				item.progress = 100
 			end
 		end
-
 		#items.sort_by(&:days_left)
-
 	end
 
 	def days_to_return(date1, date2)

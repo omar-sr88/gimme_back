@@ -282,6 +282,10 @@ ul.alert-dropdown {
     display: inline-block;
     padding-left: 1em;
     float: right;
+
+    a{
+        color: white;
+    }
 }
 
 

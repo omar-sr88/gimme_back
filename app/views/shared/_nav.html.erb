@@ -38,18 +38,18 @@
         	 <!-- <li class="bolado">
         	 	<div class="my-img-container">
         	    <%= image_tag("omar.jpg" , class: "user-photo") %>
-        	 	</div>
+        	 	</div is>
     			<span class="user-name" ><a href="">Omar Ramalho</a></span>	
             </li> -->
 
             <li class="active">
-                <a href=""><i class="fa fa-fw fa-dashboard"></i> Todos</a>
+                <%= link_to "<i class=\"fa fa-fw fa-dashboard\"></i> Todos".html_safe, items_path(:flag => "all")%>
             </li>
             <li>
-                <a href=""><i class="fa fa-fw fa-bar-chart-o"></i> Meus por ae</a>
+               <%= link_to "<i class=\"fa fa-fw fa-bar-chart-o\"></i> Meus por ae".html_safe, items_path(:flag => "mine")%>
             </li>
              <li>
-                <a href=""><i class="fa fa-fw fa-bar-chart-o"></i> Dos outros por aqui</a>
+                 <%= link_to "<i class=\"fa fa-fw fa-bar-chart-o\"></i> Dos outros por aqui".html_safe, items_path(:flag => "others") %>
             </li>
             <li>
                 <%= link_to "<i class=\"fa fa-fw fa-group\"></i> Galera ".html_safe, users_path %>
