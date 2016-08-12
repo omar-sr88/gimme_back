@@ -1,11 +1,11 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
+  layout "model-edit", only: [ :edit ] 
 
   # GET /items
   # GET /items.json
   def index
-    #param for all, mine, others
     @items = Item.set_progress(@current_user,params[:flag])
   end
 
@@ -18,6 +18,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+
   end
 
   # GET /items/1/edit

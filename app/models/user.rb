@@ -1,8 +1,9 @@
 class User < ApplicationRecord
 
   #todo create user soft delete feature
-
-	attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :activation_token, :reset_token
+  has_many :owned_items, :class_name => 'Item', :foreign_key =>  :owner_id
+  has_many :received_items, :class_name => 'Item', :foreign_key => :recipient_id
 
 	before_save :downcase_email #{ self.email = email.downcase }
 	before_create :create_activation_digest
@@ -13,8 +14,7 @@ class User < ApplicationRecord
 	has_secure_password              
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  has_many :owned_items, :class_name => 'Items', :foreign_key => 'owner_id'
-  has_many :received_items, :class_name => 'Items', :foreign_key => 'recipient_id'
+
 
 
 	# Returns the hash digest of the given string.

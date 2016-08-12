@@ -13,25 +13,75 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_area :description, class: 'form-control' %>
   </div>
-
+  <div class="row">
+      <div class='col-md-5'>
+          <div class="form-group">
+              <%= f.label :date_lended %>
+              <div class='input-group date' id='datetimepicker6'>
+                  <%= f.text_field :date_lended,:value => item.date_lended.strftime("%d-%m-%Y"), "data-provide" => 'datetimepicker', :class=> "form-control", :readonly => params[:action] == "edit" %>
+                  <span class="input-group-addon">
+                      <span class="fa fa-calendar"></span>
+                  </span>
+              </div>
+          </div>
+      </div>
+      <div class='col-md-5'>
+          <div class="form-group">
+              <%= f.label :initial_return_date %>
+              <div class='input-group date' id='datetimepicker7'>
+                  <%= f.text_field :initial_return_date,  :value => item.date_lended.strftime("%d-%m-%Y"), "data-provide" => 'datepicker', :class=> "form-control" %>
+                  <span class="input-group-addon">
+                      <span class="fa fa-calendar"></span>
+                  </span>
+              </div>
+          </div>
+      </div>
+  </div>
   <div class="field">
-    <%= f.label :date_lended %>
-    <%= f.date_select :date_lended %>
+    <%= f.label :Recipient %>
+    <%= f.text_field :recipient, :value => item.recipient.name, class: 'form-control',:readonly => params[:action] == "edit"  %>
   </div>
 
-    <div class="field">
-    <%= f.label :initial_return_date %>
-    <%= f.date_select :initial_return_date %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions" >
+    <%= f.submit "Update", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker({
+          icons: {
+                            time: "fa fa-clock-o",
+                            date: "fa fa-calendar",
+                            up: "fa fa-arrow-up",
+                            down: "fa fa-arrow-down",
+                            next: "fa fa-arrow-right",
+                            previous: "fa fa-arrow-left"
+                        },keepOpen: true, format: 'DD/MM/YYYY'
+        });
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false, //Important! See issue #1075
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down",
+                next: "fa fa-arrow-right",
+                previous: "fa fa-arrow-left"
+            },keepOpen: true, format: 'DD/MM/YYYY'
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>

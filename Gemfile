@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem "active_link_to"
 
 gem 'coffee-script-source', '1.8.0'
 gem 'bootstrap-sass', '~> 3.3.7'
@@ -35,6 +36,8 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'faker',          '1.6.3'
 gem 'will_paginate',           '3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

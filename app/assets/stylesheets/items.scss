@@ -1,3 +1,43 @@
 // Place all the styles related to the Items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.panel-title-custom {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit;
+  width: 50%;
+  display: inline-block;
+}
+
+
+.panel-user-name {
+  width: 50%;
+  float:right;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+
+  .btn{
+    color: white;
+  }
+}
+
+.add-button-wrapper{
+    margin:10px;
+    a{
+       color: white;
+       background-color: #4e9e00;
+    }   
+    a:hover{
+       color: white;
+       background-color: #4e9e00;
+    }
+}
+
+.panel-default {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
