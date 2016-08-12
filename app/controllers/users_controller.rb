@@ -56,7 +56,10 @@ class UsersController < ApplicationController
   end
 
   def search
-
+    @users = User.search(params[:search_text]) 
+    respond_to do |format|
+      format.json { render :json => @users  }
+    end
   end
 
   private

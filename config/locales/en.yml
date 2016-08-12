@@ -19,11 +19,13 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en-US:
+en:
   date:
     datepicker:
-      default: "mm/dd/yyyy"
+      default: "%d-%m-%y"
       long: "MM dd, yyyy"
     formats:
-      default: "dd/mm/yyyy"
+      common: "%m-%d-%y"
+      default: "%m-%d-%y"
+      weird: "arrrrr %d"
       long: ! '%B %d, %Y'

@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
-  layout "model-edit", only: [ :edit ] 
+  layout "model-edit", only: [ :edit,:new ,:show]  
 
   # GET /items
   # GET /items.json
@@ -12,13 +12,11 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-    @item = Item.find(params[:id])
   end
 
   # GET /items/new
   def new
     @item = Item.new
-
   end
 
   # GET /items/1/edit
@@ -43,11 +41,13 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
+    byebug
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
+        flash[:error] = "Couldnt update"
         format.html { render :edit }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
@@ -67,7 +67,11 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
+      byebug
       @item = Item.find(params[:id])
+      @item.date_lended = @item.date_lended.to_s(:common)
+      @item.initial_return_date = @item.initial_return_date.to_s(:common)
+      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

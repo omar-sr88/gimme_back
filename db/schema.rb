@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(version: 20160810192034) do
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "date_lended"
+    t.date     "date_lended"
     t.integer  "owner_id"
     t.integer  "recipient_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.datetime "initial_return_date"
-    t.datetime "returned_date"
+    t.date     "initial_return_date"
+    t.date     "returned_date"
     t.index ["owner_id", "created_at"], name: "index_items_on_owner_id_and_created_at"
     t.index ["owner_id"], name: "index_items_on_owner_id"
     t.index ["recipient_id", "created_at"], name: "index_items_on_recipient_id_and_created_at"

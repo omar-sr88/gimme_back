@@ -1,3 +1,4 @@
+
 <%= form_for(item) do |f| %>
   <% if item.errors.any? %>
     <div id="error_explanation">
@@ -25,7 +26,7 @@
           <div class="form-group">
               <%= f.label :date_lended %>
               <div class='input-group date' id='datetimepicker6'>
-                  <%= f.text_field :date_lended,:value => item.date_lended.strftime("%d-%m-%Y"), "data-provide" => 'datetimepicker', :class=> "form-control", :readonly => params[:action] == "edit" %>
+                  <%= f.text_field :date_lended , "data-provide" => 'datepicker', :class=> "form-control", :readonly => params[:action] == "edit" %>
                   <span class="input-group-addon">
                       <span class="fa fa-calendar"></span>
                   </span>
@@ -36,7 +37,7 @@
           <div class="form-group">
               <%= f.label :initial_return_date %>
               <div class='input-group date' id='datetimepicker7'>
-                  <%= f.text_field :initial_return_date,  :value => item.date_lended.strftime("%d-%m-%Y"), "data-provide" => 'datepicker', :class=> "form-control" %>
+                  <%= f.text_field :initial_return_date, "data-provide" => 'datepicker', :class=> "form-control" %>
                   <span class="input-group-addon">
                       <span class="fa fa-calendar"></span>
                   </span>
@@ -49,25 +50,36 @@
     <%= f.text_field :recipient, :value => item.recipient.name, class: 'form-control',:readonly => params[:action] == "edit"  %>
   </div>
 
+  <div class="row">
+        <div class='col-md-5'>
+          <span> Got it back? <%= f.check_box :returned , :id => "ck-tem-back", :class => "squaredOne" %></span>
+            <div class="form-group">
+                <div class='input-group date returned-date-h' id='datetimepicker8'>
+                    <%= f.text_field :actual_return_date,:value => Date.current().strftime("%d-%m-%Y"), "data-provide" => 'datetimepicker', :class=> "form-control" %>
+                    <span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
   <div class="actions" >
     <%= f.submit "Update", class: "btn btn-primary" %>
   </div>
+
+ <!-- <%= f.select :recipient, [], { include_blank: true }, {class: 'chosen-select form-control'} %>-->
+
+
+
 <% end %>
 
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker6').datetimepicker({
-          icons: {
-                            time: "fa fa-clock-o",
-                            date: "fa fa-calendar",
-                            up: "fa fa-arrow-up",
-                            down: "fa fa-arrow-down",
-                            next: "fa fa-arrow-right",
-                            previous: "fa fa-arrow-left"
-                        },keepOpen: true, format: 'DD/MM/YYYY'
-        });
-        $('#datetimepicker7').datetimepicker({
-            useCurrent: false, //Important! See issue #1075
+        $('#datetimepicker6').datepicker();
+        $('#datetimepicker7').datepicker({
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -75,13 +87,30 @@
                 down: "fa fa-arrow-down",
                 next: "fa fa-arrow-right",
                 previous: "fa fa-arrow-left"
-            },keepOpen: true, format: 'DD/MM/YYYY'
+            }
+            ,keepOpen: true
+            ,locale: 'en'
         });
+        $('#datetimepicker8').datepicker({
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down",
+                next: "fa fa-arrow-right",
+                previous: "fa fa-arrow-left"
+            },keepOpen: true
+        });
+
         $("#datetimepicker6").on("dp.change", function (e) {
             $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
         });
         $("#datetimepicker7").on("dp.change", function (e) {
             $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
         });
+         $("#datetimepicker8").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
     });
+
 </script>

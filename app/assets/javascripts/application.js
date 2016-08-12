@@ -15,5 +15,9 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require page
-//= require moment
-//= require bootstrap-datetimepicker
+//= require chosen-jquery
+//= require bootstrap-datepicker
+
+
+// $($(".chosen-select")[0]).html('');
+// $(".chosen-select").trigger('chosen:updated');

@@ -7,6 +7,7 @@ class Item < ApplicationRecord
 
 	attr_accessor :days_left
 	attr_accessor :progress
+	attr_accessor :returned
 
 
 	def Item.set_progress(user,flag)

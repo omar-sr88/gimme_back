@@ -71,6 +71,12 @@ class User < ApplicationRecord
     update_attribute(:updated_since_sent, true)
   end
 
+
+
+  def self.search(search)
+    @users = where('email LIKE ?', "%#{search}%")
+  end
+
   private
     # Converts email to all lower-case.
     def downcase_email
