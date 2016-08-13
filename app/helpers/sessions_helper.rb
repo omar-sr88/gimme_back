@@ -53,6 +53,10 @@ module SessionsHelper
   end
 
 
+  def set_locale
+    I18n.locale = 'pt-BR'
+  end
+
  # Confirms a logged-in user.
  def logged_in_user
     unless logged_in?

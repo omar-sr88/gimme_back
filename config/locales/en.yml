@@ -25,7 +25,6 @@ en:
       default: "%d-%m-%y"
       long: "MM dd, yyyy"
     formats:
-      common: "%m-%d-%y"
-      default: "%m-%d-%y"
+      common: "%m-%d-%Y"
+      default: "%m-%d-%Y"
       weird: "arrrrr %d"
-      long: ! '%B %d, %Y'

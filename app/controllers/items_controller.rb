@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user
   layout "model-edit", only: [ :edit,:new ,:show]  
+  before_action :set_locale
 
   # GET /items
   # GET /items.json
@@ -64,13 +65,18 @@ class ItemsController < ApplicationController
     end
   end
 
+
+  def format_date(item)
+     #l(item.date_lended.to_date)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      byebug
+      #byebug
       @item = Item.find(params[:id])
-      @item.date_lended = @item.date_lended.to_s(:common)
-      @item.initial_return_date = @item.initial_return_date.to_s(:common)
+      @item.date_lended =  I18n.localize @item.date_lended if @item.date_lended
+      @item.initial_return_date = I18n.localize @item.initial_return_date if @item.initial_return_date
       
     end
 

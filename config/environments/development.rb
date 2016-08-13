@@ -60,9 +60,4 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-
-
-ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(
-  :default => '%m/%d/%Y',
-)
 end
