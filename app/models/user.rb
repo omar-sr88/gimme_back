@@ -74,7 +74,7 @@ class User < ApplicationRecord
 
 
   def self.search(search)
-    @users = where('email LIKE ?', "%#{search}%")
+    @users = select('name, email').where('email LIKE ?', "#{search}%")
   end
 
   private

@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   layout "login" 
 
   def new
-    redirect_to @current_user if logged_in?
+    redirect_to items_path if logged_in?
   end
 
   def create

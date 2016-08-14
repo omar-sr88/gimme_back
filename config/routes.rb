@@ -12,10 +12,11 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   post   '/users/search', to: 'users#search'
+  get   '/users/search', to: 'users#search'
 
   
   resources :items
-  get 'items/:flag',  to: 'items#index'
+  get 'items/:f',  to: 'items#index'
   resources :users
  	resources :account_activations, only: [:edit] 
   resources :password_resets,     only: [:new, :create, :edit, :update]

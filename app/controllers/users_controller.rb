@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.id != params[:id]
+    if current_user.id.to_s != params[:id]
       flash[:warning] = "Can't see other people profiles!"
       redirect_to items_path
     end
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.search(params[:search_text]) 
+    @users = User.search(params[:search_text]) if !params[:search_text].blank?
     respond_to do |format|
       format.json { render :json => @users  }
     end

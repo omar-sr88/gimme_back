@@ -5,9 +5,12 @@ class Item < ApplicationRecord
     validates  :owner_id, :recipient_id, presence: true
     validates  :name, presence: true, length: { maximum: 30 }
 
+
 	attr_accessor :days_left
 	attr_accessor :progress
 	attr_accessor :returned
+	attr_accessor :guest_recipient
+	
 
 
 	def Item.set_progress(user,flag)

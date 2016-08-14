@@ -47,32 +47,35 @@
   </div>
   <div class="field">
     <%= f.label :Recipient %>
-    <%= f.text_field :recipient, :value => item.recipient.name, class: 'form-control',:readonly => params[:action] == "edit"  %>
+    <% if params[:action] == "edit" %>
+      <%= link_to @item.recipient.name, @item.recipient , class: 'form-control',:readonly => true %>
+    <% else %>
+      Is your friend in GimmeBack? Search by his email!
+      <input type="text" id="user-search"></input>
+      
+      <select id="user-search-results" name="guest_recipient" size="3"> </select>
+    <% end %>
   </div>
 
-  <div class="row">
-        <div class='col-md-5'>
-          <span> Got it back? <%= f.check_box :returned , :id => "ck-tem-back", :class => "squaredOne" %></span>
-            <div class="form-group">
-                <div class='input-group date returned-date-h' id='datetimepicker8'>
-                    <%= f.text_field :actual_return_date,:value => Date.current().strftime("%d-%m-%Y"), "data-provide" => 'datepicker', :class=> "form-control" %>
-                    <span class="input-group-addon">
-                        <span class="fa fa-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+  <% if params[:action] == "edit" %>
+    <div class="row">
+          <div class='col-md-5'>
+            <span> Got it back? <%= f.check_box :returned , :id => "ck-tem-back", :class => "squaredOne" %></span>
+              <div class="form-group">
+                  <div class='input-group date returned-date-h' id='datetimepicker8'>
+                      <%= f.text_field :actual_return_date,:value => Date.current().strftime("%d-%m-%Y"), "data-provide" => 'datepicker', :class=> "form-control" %>
+                      <span class="input-group-addon">
+                          <span class="fa fa-calendar"></span>
+                      </span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  <% end %>
 
   <div class="actions" >
-    <%= f.submit "Update", class: "btn btn-primary" %>
+    <%= f.submit "Save", class: "btn btn-primary" %>
   </div>
-
- <!-- <%= f.select :recipient, [], { include_blank: true }, {class: 'chosen-select form-control'} %>-->
-
-
 
 <% end %>
 

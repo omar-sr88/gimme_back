@@ -8,21 +8,29 @@ $ ->
     rails_date = evt.date.getFullYear() + '-' + ('0' + (evt.date.getMonth() + 1)).slice(-2) + '-' + ('0' + evt.date.getDate()).slice(-2)
     $(this).next("input[type=hidden]").val(rails_date)
 
-  # enable chosen js
-  $('.chosen-select').chosen
-    allow_single_deselect: true
-    include_blank: true
-    no_results_text: 'No results matched'
-    width: '100%'
 
-  $('.chosen-search input').on 'keyup', (e) ->
-	  sendSearchString()
-	  return
-
-  $('#ck-tem-back').change ->
-   $('#datetimepicker8').toggleClass 'returned-date-h', 'returned-date-s'
+  $('#user-search').on 'keyup', ->
+    writeData()
   return
 
+  $('#ck-tem-back').change ->
+    $('#datetimepicker8').toggleClass 'returned-date-h', 'returned-date-s'
+  return
+
+  
+writeData = ->
+	console.log 'hi'
+	url = '/users/search' 
+	$.ajax
+	  url: url
+	  data: 'search_text': $("#user-search").val();
+	  success: (data) ->
+	    $('#user-search-results').html ''
+	    $.each data, (i, obj) ->
+        $('#user-search-results').append $('<option>').attr('value', obj.email).text(obj.name)
+        return
+      return
+	  dataType: 'json'
 
 setUp = (data, text) ->
 	$('.chosen-select').html('')
@@ -46,4 +54,5 @@ sendSearchString = ->
 	      error:(data) ->
 	        return false
 	     return false
+
 

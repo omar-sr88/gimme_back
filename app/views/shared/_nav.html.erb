@@ -40,14 +40,14 @@
     			<span class="user-name" ><a href="">Omar Ramalho</a></span>	
             </li> -->
 
-            <li class=<%= 'active' if params[:flag] == 'all' %>>
-                <%= link_to "<i class=\"fa fa-fw fa-dashboard\"></i> Todos".html_safe, items_path(:flag => "all")%>
+            <li class=<%= 'active' if params[:f] == 'all' %>>
+                <%= link_to "<i class=\"fa fa-fw fa-dashboard\"></i> Todos".html_safe, items_path(:f => "all")%>
             </li>
-            <li class=<%= 'active' if params[:flag] == 'mine' %>>
-               <%= link_to "<i class=\"fa fa-fw fa-bar-chart-o\"></i> Meus por ae".html_safe, items_path(:flag => "mine")%>
+            <li class=<%= 'active' if params[:f] == 'mine' %>>
+               <%= link_to "<i class=\"fa fa-fw fa-bar-chart-o\"></i> Meus por ae".html_safe, items_path(:f => "mine")%>
             </li>
-             <li class=<%= 'active' if params[:flag] == 'others' %>>
-                 <%= link_to "<i class=\"fa fa-fw fa-bar-chart-o\"></i> Dos outros por aqui".html_safe, items_path(:flag => "others") %>
+             <li class=<%= 'active' if params[:f] == 'others' %>>
+                 <%= link_to "<i class=\"fa fa-fw fa-bar-chart-o\"></i> Dos outros por aqui".html_safe, items_path(:f => "others") %>
             </li>
             <li>
                 <%= link_to "<i class=\"fa fa-fw fa-group\"></i> Galera ".html_safe, users_path %>
