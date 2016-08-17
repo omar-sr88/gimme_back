@@ -8,11 +8,11 @@ class User < ApplicationRecord
 	before_save :downcase_email #{ self.email = email.downcase }
 	before_create :create_activation_digest
 	validates :name, presence: true , length: { maximum: 50 }
-	validates :email, presence: true, uniqueness: { case_sensitive: false } , length: { maximum: 50 }, 
-	           format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }   
-	            
-	has_secure_password              
-	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+	validates :email, presence: true, uniqueness: { case_sensitive: false } , length: { maximum: 50 }  
+	validates  :email,   format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }  if  self.class.name == 'User'
+
+	has_secure_password           
+	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true 
 
 
 

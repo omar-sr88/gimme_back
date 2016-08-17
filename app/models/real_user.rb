@@ -1,0 +1,3 @@
+class RealUser < User
+
+end

@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-  end
+  end 
 
   # GET /items/new
   def new
@@ -27,8 +27,8 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    byebug
-    @item = Item.new(item_params)
+    #need preparation and saving of GuestUser if its the case
+    @item = Item.prepare_for_save(item_params,@current_user)
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
@@ -73,15 +73,13 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      #byebug
       @item = Item.find(params[:id])
       @item.date_lended =  I18n.localize @item.date_lended if @item.date_lended
-      @item.initial_return_date = I18n.localize @item.initial_return_date if @item.initial_return_date
-      
+      @item.initial_return_date = I18n.localize @item.initial_return_date if @item.initial_return_date  
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :description, :date_lended, :initial_return_date, :recipient)
+      params.require(:item).permit(:name, :description, :date_lended, :initial_return_date, :recipient_email, :is_guest ,:guest_recipient)
     end
 end

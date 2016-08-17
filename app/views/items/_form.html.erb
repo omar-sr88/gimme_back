@@ -25,36 +25,50 @@
       <div class='col-md-5'>
           <div class="form-group">
               <%= f.label :date_lended %>
-              <div class='input-group date' id='datetimepicker6'>
-                  <%= f.text_field :date_lended ,  :class=> "form-control", :readonly => params[:action] == "edit" %>
+              <div class='input-group date' id='date_lended'>
+                  <input type="text" class="form-control"></input>
                   <span class="input-group-addon">
                       <span class="fa fa-calendar"></span>
                   </span>
               </div>
+              <%= f.text_field :date_lended, :hidden => "true" %>
           </div>
       </div>
       <div class='col-md-5'>
           <div class="form-group">
               <%= f.label :initial_return_date %>
-              <div class='input-group date' id='datetimepicker7'>
-                  <%= f.text_field :initial_return_date,  :class=> "form-control" %>
+              <div class='input-group date' id='initial_return_date'>
+                <input type="text" class="form-control"></input>
                   <span class="input-group-addon">
                       <span class="fa fa-calendar"></span>
                   </span>
               </div>
+              <%= f.text_field :initial_return_date,  :hidden => "true" %>
           </div>
       </div>
   </div>
   <div class="field">
-    <%= f.label :Recipient %>
+    <%= f.label :recipient %>
     <% if params[:action] == "edit" %>
       <%= link_to @item.recipient.name, @item.recipient , class: 'form-control',:readonly => true %>
     <% else %>
-      Is your friend in GimmeBack? Search by his email!
-      <input type="text" id="user-search"></input>
-      
-      <select id="user-search-results" name="guest_recipient" size="3"> </select>
+      <p>Is your friend in GimmeBack? <span> Check here if he is not <%= f.check_box :is_guest , :id => "ck-recipient", :class => "squaredOne" %></span></p> 
+
+      <%= f.text_field :recipient_id, :class=> "form-control user-search" , :placeholder => "Try finding him by his email..."%>    
+      <p>Is he/she on of these?</p>          
+      <select id="user-search-results" name="item[recipient_email]" size="5"> </select>
     <% end %>
+  </div>
+
+  <div class="row guest">
+      <div class='col-md-5'>
+          <div class="form-group">
+              <%= f.label "Still not with us? No problem put your friends name here " %>
+              <div class='input-group'>
+                  <%= f.text_field :guest_recipient, :class=> "form-control" %>
+              </div>
+          </div>
+      </div>
   </div>
 
   <% if params[:action] == "edit" %>
@@ -81,8 +95,13 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker6').datepicker({language: "<%=I18n.locale%>" });
-        $('#datetimepicker7').datepicker({language: "<%=I18n.locale%>" });
+        $('#date_lended').datepicker({endDate: new Date(), 
+                                         language: "<%=I18n.locale%>",
+                                         todayBtn: true
+                                      });
+        
+
+        $('#initial_return_date').datepicker({language: "<%=I18n.locale%>"});
         $('#datetimepicker8').datepicker({
             icons: {
                 time: "fa fa-clock-o",
@@ -91,20 +110,22 @@
                 down: "fa fa-arrow-down",
                 next: "fa fa-arrow-right",
                 previous: "fa fa-arrow-left"
-            },keepOpen: true
+            }
         });
 
-        // $("#datetimepicker6").on("dp.change", function (e) {
-        //     $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-        // });
-        // $("#datetimepicker7").on("dp.change", function (e) {
-        //     $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-        // });
-        //  $("#datetimepicker8").on("dp.change", function (e) {
-        //     $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-        // });
-
-
+        $('#date_lended').datepicker().on("input change", function (e) {
+          if(
+            $('#date_lended').datepicker('getDate')){ 
+            $("#item_date_lended").val($('#date_lended').datepicker('getDate').toISOString().slice(0,10));
+            $("#initial_return_date").datepicker("setStartDate", $("#date_lended").datepicker("getDate"));
+            $("#initial_return_date").datepicker( "setDate", $("#date_lended").datepicker("getDate"));
+          }
+        });
+        $('#initial_return_date').datepicker().on("input change", function (e) {
+          if( $('#initial_return_date').datepicker('getDate')){ 
+            $("#item_initial_return_date").val($('#initial_return_date').datepicker('getDate').toISOString().slice(0,10));
+          }
+        });
     });
 
 </script>
