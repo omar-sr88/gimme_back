@@ -70,6 +70,20 @@ class ItemsController < ApplicationController
      #l(item.date_lended.to_date)
   end
 
+  def return
+    @item = Item.find(params[:id])
+    if !@item.is_owned_by?(@current_user)
+      flash[:error] = "Could not returned that item"
+      redirect_to items_url
+    end
+    if @item.update_columns(returned_date: Date.current,returned: true)
+      flash[:success] = "Item returned successfully! Check history list to see it"
+    else
+      flash[:error] = "Could not return item."
+    end
+    redirect_to items_url
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item

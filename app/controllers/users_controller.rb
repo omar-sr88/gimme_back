@@ -15,10 +15,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.id.to_s != params[:id]
-      flash[:warning] = "Can't see other people profiles!"
-      redirect_to items_path
-    end
+    # if current_user.id.to_s != params[:id]
+    #   flash[:warning] = "Can't see other people profiles!"
+    #   redirect_to items_path
+    # end
   	@user = User.find(params[:id])
   end
 

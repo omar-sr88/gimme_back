@@ -49,6 +49,9 @@
              <li class=<%= 'active' if params[:f] == 'others' %>>
                  <%= link_to "<i class=\"fa fa-fw fa-bar-chart-o\"></i> Dos outros por aqui".html_safe, items_path(:f => "others") %>
             </li>
+            <li class=<%= 'active' if params[:f] == 'others' %>>
+                 <%= link_to "<i class=\"fa fa-fw fa-bar-chart-o\"></i> Devolvidos ".html_safe, items_path(:f => "done") %>
+            </li>
             <li>
                 <%= link_to "<i class=\"fa fa-fw fa-group\"></i> Galera ".html_safe, users_path %>
             </li>

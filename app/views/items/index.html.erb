@@ -13,8 +13,8 @@
   <% @items.each do |item| %>     
   <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title-custom"><i class="fa fa-book"></i>  <%= item.name %></h3>
-            <h3 class="panel-user-name">Com: <i class="fa fa-arrow-right"></i> <%= item.recipient.name %>        <span><%= link_to 'Show', user_path(item.recipient) , :class => "btn btn-xs btn-success" %></span></h3> 
+            <h3 class="panel-title-custom"><i class="fa fa-book"></i>  <%= link_to item.name, item %></h3>
+            <h3 class="panel-user-name">Com: <i class="fa fa-arrow-right"></i> <%= item.recipient.name %>        <span><%= link_to 'Show', user_display_path(item.recipient) , :class => "btn btn-xs btn-success" %></span></h3> 
 
         </div>
        
@@ -31,36 +31,24 @@
 
           <p>
             <strong>Quando?</strong>
-            <%= item.date_lended.to_s(:item) %>
+            <%= l(item.date_lended) %>
           </p>
           <p>
             <strong>E a data pra devolver?</strong>
-            <%= item.initial_return_date.to_s(:item) %>
+            <%= l(item.initial_return_date) %>
           </p>
 
          <div class="progress">
-            <div class="progress-bar 
-            <% if item.days_left < 0 %> 
-              progress-bar-danger
-            <%elsif item.days_left == 0 %>
-              progress-bar-warning
-            <%end%> progress-bar-success" role="progressbar" 
+            <div class="progress-bar <%= item.progress_status  %> progress-bar-success" role="progressbar" 
             aria-valuenow="<%=  item.progress  %>." 
             aria-valuemin="0" 
             aria-valuemax="100" 
             style="width:<%= item.progress %>%;">
-            <% if item.days_left == 0 %>
-              É Hoje! Vai atrás mermão!
-            <%  elsif  item.days_left < 0 %>
-             Xi jão, te deram o guela
-             <%else %>
-              Faltam <%= item.days_left %>
-            <% end%>
-            
+            <%= item.progress_message %>  
             </div>
          </div>
-          <%= link_to 'Show', item , :class => "btn btn-sm btn-primary" %>
           <%= link_to 'Edit', edit_item_path(item), :class => "btn btn-sm btn-info" %>
+          <%= link_to 'Peguei de volta!', item_return_path(item) , "method" => "post",:class => "btn btn-sm btn-warning" %>
         </div>
       </div>
     </div>    

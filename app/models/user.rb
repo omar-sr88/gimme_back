@@ -4,12 +4,15 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
   has_many :owned_items, :class_name => 'Item', :foreign_key =>  :owner_id
   has_many :received_items, :class_name => 'Item', :foreign_key => :recipient_id
+  has_one :info, :class_name => 'UserInfo' , :foreign_key =>  :user_id
+  accepts_nested_attributes_for :info
 
-	before_save :downcase_email #{ self.email = email.downcase }
+	before_save :downcase_email if  self.class.name == 'User'
 	before_create :create_activation_digest
 	validates :name, presence: true , length: { maximum: 50 }
-	validates :email, presence: true, uniqueness: { case_sensitive: false } , length: { maximum: 50 }  
-	validates  :email,   format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }  if  self.class.name == 'User'
+
+	validates :email, presence: true, uniqueness: { case_sensitive: false } , length: { maximum: 50 }  if  self.class.name == 'User'
+	validates :email,   format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }  if  self.class.name == 'User'
 
 	has_secure_password           
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true 
