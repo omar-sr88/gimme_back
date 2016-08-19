@@ -11,6 +11,8 @@ class User < ApplicationRecord
 	before_create :create_activation_digest
 	validates :name, presence: true , length: { maximum: 50 }
 
+  validates :nick, presence: true , length: { minimum: 4 , maximum: 15 }
+
 	validates :email, presence: true, uniqueness: { case_sensitive: false } , length: { maximum: 50 }  if  self.class.name == 'User'
 	validates :email,   format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }  if  self.class.name == 'User'
 
@@ -74,11 +76,14 @@ class User < ApplicationRecord
     update_attribute(:updated_since_sent, true)
   end
 
-
-
   def self.search(search)
-    @users = select('name, email').where('email LIKE ?', "#{search}%")
+    @users = select('name, email').where('username LIKE ?', "#{search}%")
   end
+
+  def self.username_available(username)
+    User.where(nick: username).empty?
+  end
+
 
   private
     # Converts email to all lower-case.

@@ -17,6 +17,11 @@ class Item < ApplicationRecord
 	attr_accessor :guest_recipient
 	attr_accessor :recipient_email
 	attr_accessor :is_guest
+	attr_accessor :guest_phone
+	attr_accessor :guest_address
+	attr_accessor :guest_email
+	
+
 
 	def Item.set_progress(user,flag)
 		case flag
@@ -68,6 +73,10 @@ class Item < ApplicationRecord
       self.owner_id == user.id	
     end
 
+    def Item.are_users_related?(current, to_display)
+    	Item.where(owner_id: current, recipient_id: to_display).or(Item.where(owner_id: to_display ,recipient_id: current)).pluck(:id).length > 0
+    end
+
 
 	def days_to_return(date1, date2)
   	  (date2.to_date - date1.to_date).to_i
@@ -81,6 +90,8 @@ class Item < ApplicationRecord
 		unless item_params[:guest_recipient].blank?
 		  guest = GuestUser.new(name: item_params[:guest_recipient], email: nil , password:"gimmebackdefault")
 		  guest.save  
+		  uf = UserInfo.new(phone_number: item_params[:guest_phone], contact_email: item_params[:guest_email], address: item_params[:guest_address], user_id: guest.id)
+		  uf.save
 		  @item.recipient_id = guest.id
 		else
 		   @item.errors.add(:recipient,"Guest Recipient needs a name")

@@ -22,7 +22,7 @@
     <%= f.text_area :description, class: 'form-control' %>
   </div>
   <div class="row">
-      <div class='col-md-5'>
+      <div class="col-md-10">
           <div class="form-group">
               <%= f.label :date_lended %>
               <div class='input-group date' id='date_lended'>
@@ -67,6 +67,16 @@
               <div class='input-group'>
                   <%= f.text_field :guest_recipient, :class=> "form-control" %>
               </div>
+              <%= f.label "Add some contact information too!" %>
+              <br/>
+              <%= f.label "Phone" %>
+              <%= f.text_field :guest_phone,  :class=> 'form-control' %>
+
+              <%= f.label "Address" %>
+              <%= f.text_field :guest_address, :class=> 'form-control' %>
+
+              <%= f.label "Contact Email" %>
+              <%= f.text_field :guest_email, :class=> 'form-control' %>
           </div>
       </div>
   </div>

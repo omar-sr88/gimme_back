@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817230336) do
+ActiveRecord::Schema.define(version: 20160819131717) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(version: 20160817230336) do
     t.index ["owner_id"], name: "index_items_on_owner_id"
     t.index ["recipient_id", "created_at"], name: "index_items_on_recipient_id_and_created_at"
     t.index ["recipient_id"], name: "index_items_on_recipient_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "title"
+    t.text     "message"
+    t.integer  "sender_id"
+    t.integer  "to_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sender_id"], name: "index_notifications_on_sender_id"
+    t.index ["to_id"], name: "index_notifications_on_to_id"
   end
 
   create_table "user_infos", force: :cascade do |t|

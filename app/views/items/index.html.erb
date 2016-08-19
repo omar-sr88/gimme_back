@@ -14,7 +14,7 @@
   <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title-custom"><i class="fa fa-book"></i>  <%= link_to item.name, item %></h3>
-            <h3 class="panel-user-name">Com: <i class="fa fa-arrow-right"></i> <%= item.recipient.name %>        <span><%= link_to 'Show', user_display_path(item.recipient) , :class => "btn btn-xs btn-success" %></span></h3> 
+            <h3 class="panel-user-name">Com: <i class="fa fa-arrow-right"></i> <%= item.recipient.name %>        <span><%= link_to 'Show', user_path(item.recipient) , :class => "btn btn-xs btn-success" %></span></h3> 
 
         </div>
        

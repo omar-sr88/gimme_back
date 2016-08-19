@@ -1,17 +1,91 @@
+
 <%= form_for(@user) do |f| %>
-  <%= render 'shared/error_messages', object: @user %>
+  <div class="col-xs-10 col-md-12 col-lg-12">
+    
 
-  <%= f.label :name %>
-  <%= f.text_field :name, class: 'form-control' %>
+    <div class="page-header">
+      <h1><%= yield(:title)%></h1>
+    </div> 
 
-  <%= f.label :email %>
-  <%= f.email_field :email, class: 'form-control' %>
+    <%= render 'shared/error_messages', object: @user %>
 
-  <%= f.label :password %>
-  <%= f.password_field :password, class: 'form-control' %>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, class: 'form-control' %>
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
 
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <%= f.label "Username" %>
+    <%= f.email_field :nick, class: 'form-control' %> 
+
+    <p><span class="username-status"></span></p>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+    <% if params[:action] == 'edit' %>
+      <div class="gravatar_edit">
+          <%= gravatar_for @user %>
+          <a href="http://gravatar.com/emails" rel="noopener" target="_blank">change</a>
+      </div>
+    <% end %>
+
+  </div>
+  <% if params[:action] != 'new' %>
+  <div class="col-xs-6 ">
+
+    <div class="page-header">
+      <h1>Contact Info</h1>
+    </div>
+
+      <%= f.fields_for :info do |ff|  %>
+
+        <%= ff.label :phone_number %>
+        <%= ff.text_field :phone_number, class: 'form-control' %>
+
+        <%= ff.label :address %>
+        <%= ff.text_field :address, class: 'form-control' %>
+
+        <%= ff.label :contact_email %>
+        <%= ff.text_field :contact_email, class: 'form-control' %>
+
+      <% end %>
+
+  </div>
+   <% end %>
+  <%= f.submit yield(:button_text), class: "btn btn-primary btn-edit-user" %>
 <% end %>
+
+<script>
+
+ $(function () {
+        $('#user_nick').focusout(function(e){
+          nick = $(e.currentTarget).val();
+          if (nick == '') {
+            $('.username-status').html("");
+            return false}
+          url = '/users/nick';
+          $.ajax({
+              url: url,
+              dataType: 'json',
+              data: {
+                'username': nick
+              },
+              success: function(data) {
+                if(data){
+                  $('.username-status').html("Username Available!");
+                  //add styling
+                }
+                else{
+                  $('.username-status').html("Username already taken");
+                   //add styling
+                }
+              }
+          })
+        });
+      });
+
+</script>

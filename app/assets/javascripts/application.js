@@ -13,10 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap
 //= require bootstrap-sprockets
-//= require page
-//= require chosen-jquery
 //= require bootstrap-datepicker
+//= require page
+//= require_tree .
 
 
 // $($(".chosen-select")[0]).html('');

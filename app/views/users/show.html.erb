@@ -4,13 +4,33 @@
         <!-- Page Heading -->
     <div class="row">
        	<div class="col-lg-12">
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
-<% if current_user.id.to_s != params[:id] %>
-<%= @user.info.phone_number %>
+
+
+<% if current_user.id.to_s == params[:id] %>
+	<div class="page-header">
+	    <h1>Personal Info  <span><%= link_to 'Edit info', edit_user_path(@user) , :class => "btn btn-success" %></span></h1>
+	</div>
+	<div>
+		<%= gravatar_for @user %>
+	  <p>Name: <%= @user.name %></p>
+	  <p>UserName<%= @user.nick %></p>
+	  <p>Joined in <%= @user.created_at.to_s %></p>
+	</div>
 <% end %>
+
+
+<div class="page-header">
+    <h1>Contact Info</h1>
+</div>
+<div>
+
+	<p>Name: <%= @user.name %></p>
+
+	<p>Phone: <%= @user.info.phone_number if @user.info%> <p>
+
+
+</div>
+
 
 		</div>
 	</div>

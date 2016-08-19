@@ -28,6 +28,7 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     #need preparation and saving of GuestUser if its the case
+    byebug
     @item = Item.prepare_for_save(item_params,@current_user)
     respond_to do |format|
       if @item.save
@@ -65,6 +66,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def logout_error
+    byebug
+    puts "achei"
+  end
 
   def format_date(item)
      #l(item.date_lended.to_date)
@@ -94,6 +99,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :description, :date_lended, :initial_return_date, :recipient_email, :is_guest ,:guest_recipient)
+      params.require(:item).permit(:name, :description, :date_lended, :initial_return_date, :recipient_email, :is_guest ,:guest_recipient, :guest_phone)
     end
 end

@@ -6,4 +6,4 @@ var ready = function() {
 	$(".dropdown-toggle").dropdown();
 };
 
-$(document).off().on('turbolinks:load', ready);
+$(document).on('turbolinks:load', ready);

@@ -13,12 +13,11 @@ Rails.application.routes.draw do
 
   post   '/users/search', to: 'users#search'
   get   '/users/search', to: 'users#search'
+  get   '/users/nick', to: 'users#check_username'
 
-  
   resources :items
   get 'items/:f',  to: 'items#index'
   get 'items/:id/return' ,  to: 'items#return' , as: :item_return
-  get 'users/:id/display' ,  to: 'users#show' , as: :user_display
   resources :users
  	resources :account_activations, only: [:edit] 
   resources :password_resets,     only: [:new, :create, :edit, :update]
