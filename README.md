@@ -13,10 +13,10 @@ Currently it uses:
 
 So far the following are implemented
 
-* User registration, email activation, login, 'remember me' , password recovery , info editing
+* User registration, email activation, login, 'remember me' , password recovery , info editing. User contact info
 * Item registration , searching other users or creating recipient automatically as a guest, editing , returning the item, listing of open (users and friends) and returned items
 * Progress bar indicating time until defined return date
-* Creates simple message to recipient of item when item is created, lists all items
+* Creates simple message to recipient of item when item is created, lists all messages
 
 Next 
 
