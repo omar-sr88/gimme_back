@@ -20,7 +20,7 @@ So far the following are implemented
 * Tests for navigation, user related actions, item creation and lending
 
 Next 
-
+* Add item image upload and crop
 * I18n translations for pt-br and en-Us
 * Email notification via SendGrid
 * Friend List
