@@ -1,4 +1,4 @@
-# README
+# Gimmeback
 
 Hello there! On my road to learning (and getting good at!) Ruby on Rails I started this little app to cover a couple of features by adding some standard functionalities.
 
