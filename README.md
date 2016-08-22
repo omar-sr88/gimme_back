@@ -1,6 +1,6 @@
 # Gimmeback
 
-Hello there! On my road to learning (and getting good at!) Ruby on Rails I started this little app to cover a couple of features by adding some standard functionalities.
+Hello there! On my road to learning (and getting good at!) Ruby on Rails I started this little app to cover a couple of rails features by adding some standard functionalities.
 
 Gimmeback is a simple webpage to add and track those books, games and other stuff you lend your friends.
 
