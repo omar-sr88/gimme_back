@@ -17,6 +17,7 @@ So far the following are implemented
 * Item registration , searching other users or creating recipient automatically as a guest, editing , returning the item, listing of open (users and friends) and returned items
 * Progress bar indicating time until defined return date
 * Creates simple message to recipient of item when item is created, lists all messages
+* Tests for navigation, user related actions, item creation and lending
 
 Next 
 
