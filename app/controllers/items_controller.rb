@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.set_progress(@current_user,params[:f])
+    @items = Item.all_with_flag(@current_user,params[:f])
   end
 
   # GET /items/1
@@ -31,6 +31,7 @@ class ItemsController < ApplicationController
     byebug
     @item = Item.prepare_for_save(item_params,@current_user)
     respond_to do |format|
+      Notification.send_notification(@item, :create)
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
@@ -82,6 +83,7 @@ class ItemsController < ApplicationController
       redirect_to items_url
     end
     if @item.update_columns(returned_date: Date.current,returned: true)
+      Notification.send_notification(@item, :ret)
       flash[:success] = "Item returned successfully! Check history list to see it"
     else
       flash[:error] = "Could not return item."

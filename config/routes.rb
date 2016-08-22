@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'notifications' , to: 'notifications#index'
+
   get 'password_resets/new'
   get 'password_resets/edit'
 
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
   post   '/users/search', to: 'users#search'
   get   '/users/search', to: 'users#search'
   get   '/users/nick', to: 'users#check_username'
+  get 'notifications' , to: 'notifications#index'
 
   resources :items
   get 'items/:f',  to: 'items#index'

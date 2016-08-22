@@ -9,7 +9,7 @@ module SessionsHelper
 
   def current_user
     if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
+      @current_user ||= User.find_by(id: user_id) 
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
       if user && user.authenticated?(:remember, cookies[:remember_token])
@@ -56,6 +56,17 @@ module SessionsHelper
   def set_locale
     I18n.locale = 'pt-BR'
   end
+
+  def get_notifications(user)
+    return nil if !user.id
+    @notifications = user.received_notifications.unseen.order(:created_at).limit(3)
+    session[:messages]= @notifications.pluck(:id)
+    session[:messages_size] = user.received_notifications.unseen.size
+    @notifications
+  end
+
+
+
 
  # Confirms a logged-in user.
  def logged_in_user

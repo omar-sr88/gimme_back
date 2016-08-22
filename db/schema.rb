@@ -32,20 +32,21 @@ ActiveRecord::Schema.define(version: 20160819131717) do
   create_table "notifications", force: :cascade do |t|
     t.string   "title"
     t.text     "message"
+    t.boolean  "seen",       default: false
     t.integer  "sender_id"
     t.integer  "to_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["sender_id"], name: "index_notifications_on_sender_id"
     t.index ["to_id"], name: "index_notifications_on_to_id"
   end
 
   create_table "user_infos", force: :cascade do |t|
-    t.string   "phone_number"
-    t.string   "contact_email"
-    t.string   "address"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "phone_number",  default: ""
+    t.string   "contact_email", default: ""
+    t.string   "address",       default: ""
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_user_infos_on_user_id"
   end

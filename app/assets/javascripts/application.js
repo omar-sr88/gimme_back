@@ -37,7 +37,7 @@ $( document ).on('turbolinks:load', function() {
 	      $('#user-search-results').html('');
 	      $('#user-search-results').append($('<option>').attr('value', '').text(''));
 	      $.each(data, function(i, obj) {
-	        $('#user-search-results').append($('<option>').attr('value', obj.email).text(obj.name));
+	        $('#user-search-results').append($('<option>').attr('value', obj.nick).text(obj.name));
 	      });
 	    },
 	  });
@@ -62,5 +62,9 @@ $( document ).on('turbolinks:load', function() {
 	});
 
 	
+	$('.notifications a').click(function(){
+		$('.badge').html('');
+		//consider them read
+	})
 
 })

@@ -23,7 +23,7 @@ class Item < ApplicationRecord
 	
 
 
-	def Item.set_progress(user,flag)
+	def Item.all_with_flag(user,flag)
 		case flag
 		when 'mine'
 		  items = user.owned_items.open
@@ -35,28 +35,8 @@ class Item < ApplicationRecord
   		  items = Item.all.open
 		end
 
-		items.each do |item|
-		  	total = item.days_to_return(item.date_lended, item.initial_return_date) 
-			item.days_left = item.days_to_return(Time.now, item.initial_return_date)
-
-			if item.days_left > 0
-			  item.progress = (total - item.days_left)*100/total unless total == 0
-			else
-			  item.progress = 100
-			end
-
-			if item.days_left < 0 
-	          item.progress_status = "progress-bar-danger"
-	          item.progress_message = "Xi jão, te deram o guela!"
-	        elsif item.days_left == 0
-	          item.progress_status = "progress-bar-warning"
-	          item.progress_message = "É Hoje! Vai atrás mermão!"
-	        else
-	          item.progress_status = "progress-bar-success"
-	          item.progress_message = "Faltam #{item.days_left} dias"
-	        end	
-		end
-
+		item_progress = ItemProgress.new(items)
+		item_progress.set_progress
 		#items.sort_by(&:days_left)
 	end
 
@@ -98,7 +78,7 @@ class Item < ApplicationRecord
 		end
 	  elsif  item_params[:is_guest] == "0"
 	  	
-	  	if r = User.find_by(email: item_params[:recipient_email])
+	  	if r = User.find_by(nick: item_params[:recipient_email])
  		  @item.recipient_id = r.id
  		else
  		   @item.errors.add(:recipient,"Recipient email not found!")

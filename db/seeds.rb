@@ -10,18 +10,28 @@
 
 User.create!(name:  "Omar Ramalho",
              email: "omar.sr88@gmail.com",
+             nick:  "oscher88",
              password:              "omar123",
              password_confirmation: "omar123",
              super: true,
              activated: true,
              activated_at: Time.zone.now)
 
+UserInfo.create!(user_id: 1,
+                 phone_number: "555-555-555",
+                 contact_email: "another@email.com",
+                 address: "My house"
+  )
+
 10.times do |n|
   name  = Faker::Name.name
+  nick = ''
+  nick  = Faker::Name.last_name until nick.size > 4
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   User.create!(name:  name,
                email: email,
+               nick: nick,
                password:              password,
                password_confirmation: password,
                activated: true,

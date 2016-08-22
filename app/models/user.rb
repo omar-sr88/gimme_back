@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_one :info, :class_name => 'UserInfo' , :foreign_key =>  :user_id
   accepts_nested_attributes_for :info
 
+  has_many :sent_notifications, :class_name => 'Notification', :foreign_key =>  :sender_id
+  has_many :received_notifications, :class_name => 'Notification', :foreign_key => :to_id
+
+
 	before_save :downcase_email if  self.class.name == 'User'
 	before_create :create_activation_digest
 	validates :name, presence: true , length: { maximum: 50 }
@@ -20,7 +24,7 @@ class User < ApplicationRecord
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true 
 
 
-
+  attr_accessor :messages_unseen
 
 	# Returns the hash digest of the given string.
   def User.digest(string)
@@ -77,12 +81,14 @@ class User < ApplicationRecord
   end
 
   def self.search(search)
-    @users = select('name, email').where('username LIKE ?', "#{search}%")
+    @users = select('name, nick').where('nick LIKE ?', "#{search}%")
   end
 
   def self.username_available(username)
     User.where(nick: username).empty?
   end
+
+
 
 
   private

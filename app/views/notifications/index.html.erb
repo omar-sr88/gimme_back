@@ -1,0 +1,17 @@
+  <% @notifications.each do |n| %>     
+  <div class="panel panel-default">
+
+      <div class="panel-body">
+        <div class="list-info-wrapper">
+          <p>
+            <%= n.title %>.
+          </p>
+          <p>
+            <%= n.message %>
+          </p>
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>    
+    <% end %>

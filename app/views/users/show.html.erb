@@ -13,7 +13,7 @@
 	<div>
 		<%= gravatar_for @user %>
 	  <p>Name: <%= @user.name %></p>
-	  <p>UserName<%= @user.nick %></p>
+	  <p>UserName: <%= @user.nick %></p>
 	  <p>Joined in <%= @user.created_at.to_s %></p>
 	</div>
 <% end %>
@@ -25,9 +25,8 @@
 <div>
 
 	<p>Name: <%= @user.name %></p>
-
+	<p>UserName: <%= @user.nick %></p>
 	<p>Phone: <%= @user.info.phone_number if @user.info%> <p>
-
 
 </div>
 
