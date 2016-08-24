@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819131717) do
+ActiveRecord::Schema.define(version: 20160823121134) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +23,10 @@ ActiveRecord::Schema.define(version: 20160819131717) do
     t.date     "initial_return_date"
     t.date     "returned_date"
     t.boolean  "returned",            default: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["owner_id", "created_at"], name: "index_items_on_owner_id_and_created_at"
     t.index ["owner_id"], name: "index_items_on_owner_id"
     t.index ["recipient_id", "created_at"], name: "index_items_on_recipient_id_and_created_at"

@@ -17,6 +17,13 @@
     <%= f.text_field :name, class: 'form-control' %>
   </div>
 
+
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
+
+
   <div class="field">
     <%= f.label :description %>
     <%= f.text_area :description, class: 'form-control' %>
@@ -109,7 +116,8 @@
                                          language: "<%=I18n.locale%>",
                                          todayBtn: true
                                       });
-        
+        $('#date_lended').datepicker('setDate', $("#item_date_lended").val());
+        $('#initial_return_date').datepicker('setDate', $("#item_initial_return_date").val());
 
         $('#initial_return_date').datepicker({language: "<%=I18n.locale%>"});
         $('#datetimepicker8').datepicker({
@@ -124,18 +132,50 @@
         });
 
         $('#date_lended').datepicker().on("input change", function (e) {
-          if(
-            $('#date_lended').datepicker('getDate')){ 
-            $("#item_date_lended").val($('#date_lended').datepicker('getDate').toISOString().slice(0,10));
+          if($('#date_lended').datepicker('getDate')){ 
+            $("#item_date_lended").attr("value",$('#date_lended').datepicker('getDate').toISOString().slice(0,10));
             $("#initial_return_date").datepicker("setStartDate", $("#date_lended").datepicker("getDate"));
             $("#initial_return_date").datepicker( "setDate", $("#date_lended").datepicker("getDate"));
           }
         });
         $('#initial_return_date').datepicker().on("input change", function (e) {
           if( $('#initial_return_date').datepicker('getDate')){ 
-            $("#item_initial_return_date").val($('#initial_return_date').datepicker('getDate').toISOString().slice(0,10));
+            $("#item_initial_return_date").attr("value",$('#initial_return_date').datepicker('getDate').toISOString().slice(0,10));
           }
         });
+
+        $('.edit_item').submit(function(e){ 
+          if (!isDateISO($("#item_date_lended").attr("value"))){
+            $("#item_date_lended").attr("value",$('#date_lended').datepicker('getDate').toISOString().slice(0,10));  
+          }
+
+          if (!isDateISO($("#item_initial_return_date").attr("value"))){
+            $("#item_initial_return_date").attr("value",$('#initial_return_date').datepicker('getDate').toISOString().slice(0,10));
+          }
+        });
+
     });
+
+ function isDateISO(date){
+      date = date.split('-');
+      if (date.length != 3 )
+        return false
+
+      if (date[0].length != 4)
+        return false
+
+      if (date[1].length != 2)
+        return false
+
+      m = parseInt(date[1]);
+      if (m < 0 || m > 11)
+        return false
+
+      d = parseInt(date[2]);
+      if (d < 0 || d > 31)
+        return false
+
+      return true;
+ }
 
 </script>

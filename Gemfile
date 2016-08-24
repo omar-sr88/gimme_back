@@ -30,6 +30,8 @@ gem "active_link_to"
 
 gem "rails-i18n"
 
+gem "paperclip", "~> 5.0.0"
+
 gem 'coffee-script-source', '1.8.0'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem "font-awesome-rails"

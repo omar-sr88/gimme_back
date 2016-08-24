@@ -7,6 +7,10 @@ class Item < ApplicationRecord
     validates  :initial_return_date, presence: true
     validate   :is_range_ok?
 
+    has_attached_file :image, styles: { large: "300x300>", thumb: "150x150>" }, default_url: "/images/:style/missing.png"
+  	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
+
     scope :open, -> { where(returned: false) }
 	scope :closed, -> { where(returned: true) }
 
@@ -73,6 +77,7 @@ class Item < ApplicationRecord
 		  uf = UserInfo.new(phone_number: item_params[:guest_phone], contact_email: item_params[:guest_email], address: item_params[:guest_address], user_id: guest.id)
 		  uf.save
 		  @item.recipient_id = guest.id
+		  byebug
 		else
 		   @item.errors.add(:recipient,"Guest Recipient needs a name")
 		end

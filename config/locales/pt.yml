@@ -7,6 +7,11 @@ pt-BR:
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
+      models:
+        item:
+          attributes:
+            image:
+              spoofed_media_type: Erro no spoof media type
   date:
     datepicker:
       default: "%d-%m-%Y"

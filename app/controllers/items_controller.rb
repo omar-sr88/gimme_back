@@ -27,12 +27,13 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    #need preparation and saving of GuestUser if its the case
     byebug
+    #need preparation and saving of GuestUser if its the case
     @item = Item.prepare_for_save(item_params,@current_user)
+
     respond_to do |format|
-      Notification.send_notification(@item, :create)
       if @item.save
+        Notification.send_notification(@item, :create)
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
@@ -51,8 +52,10 @@ class ItemsController < ApplicationController
         format.json { render :show, status: :ok, location: @item }
       else
         flash[:error] = "Couldnt update"
-        format.html { render :edit }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+        flash[:model] = @item
+        flash[:model_errors] = @item.errors
+        format.html { redirect_to :action => :edit }
+        
       end
     end
   end
@@ -65,11 +68,6 @@ class ItemsController < ApplicationController
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def logout_error
-    byebug
-    puts "achei"
   end
 
   def format_date(item)
@@ -94,13 +92,28 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      @item = Item.find(params[:id])
-      @item.date_lended =  I18n.localize @item.date_lended if @item.date_lended
-      @item.initial_return_date = I18n.localize @item.initial_return_date if @item.initial_return_date  
+      #byebug
+      if flash[:model]
+        @item = Item.find(flash[:model]["id"])
+        @item.assign_attributes(flash[:model])
+        flash[:model_errors].each do |k,v|
+          @item.errors.add(k,v[0])
+        end
+        @item.date_lended =  I18n.localize @item.date_lended if @item.date_lended
+        @item.initial_return_date = I18n.localize @item.initial_return_date if @item.initial_return_date  
+        flash.clear
+        @item
+      else
+        @item = Item.find(params[:id])
+        @item.date_lended =  I18n.localize @item.date_lended if @item.date_lended
+        @item.initial_return_date = I18n.localize @item.initial_return_date if @item.initial_return_date  
+      end
+
+     
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :description, :date_lended, :initial_return_date, :recipient_email, :is_guest ,:guest_recipient, :guest_phone)
+      params.require(:item).permit(:name, :description, :date_lended, :initial_return_date, :recipient_email, :is_guest ,:guest_recipient, :guest_phone , :image)
     end
 end

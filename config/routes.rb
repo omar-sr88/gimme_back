@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'notifications' , to: 'notifications#index'
 
   get 'password_resets/new'
   get 'password_resets/edit'

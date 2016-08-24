@@ -54,7 +54,7 @@ module SessionsHelper
 
 
   def set_locale
-    I18n.locale = 'pt-BR'
+    #I18n.locale = 'pt-BR'
   end
 
   def get_notifications(user)
