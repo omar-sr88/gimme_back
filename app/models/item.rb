@@ -21,19 +21,10 @@ class Item < ApplicationRecord
 	scope :closed, -> { where(returned: true) }
 
 	
-	attr_accessor :days_left
-	attr_accessor :progress
-	attr_accessor :progress_message
-	attr_accessor :progress_status
-	attr_accessor :guest_recipient
-	attr_accessor :recipient_email
-	attr_accessor :is_guest
-	attr_accessor :guest_phone
-	attr_accessor :guest_address
-	attr_accessor :guest_email
+	#attr_accessor :days_left, :progress, :progress_message,  :progress_status
+	attr_accessor :guest_recipient,:recipient_email,:is_guest,:guest_phone, :guest_address,:guest_email
 	
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
 
 
 	def Item.all_with_flag(user,flag)
@@ -48,9 +39,8 @@ class Item < ApplicationRecord
   		  items = Item.all.open
 		end
 
-		item_progress = ItemProgress.new(items)
-		item_progress.set_progress
-		#items.sort_by(&:days_left)
+		decorators = ItemDecorator.build_collection(items)
+
 	end
 
 	def is_range_ok?
@@ -71,9 +61,7 @@ class Item < ApplicationRecord
     end
 
 
-	def days_to_return(date1, date2)
-  	  (date2.to_date - date1.to_date).to_i
-	end
+	
 
 	def crop_image
 		image.recreate_versions! if crop_x.present?	

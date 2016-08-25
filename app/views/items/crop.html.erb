@@ -5,7 +5,7 @@ Crop Image!
 
 <%= form_for @item do |f| %>
   <% %w[x y w h].each do |attribute| %>
- 	<%= f.text_field "crop_#{attribute}"%>
+ 	<%= f.hidden_field "crop_#{attribute}"%>
   <% end %>
 
  <div class="action">

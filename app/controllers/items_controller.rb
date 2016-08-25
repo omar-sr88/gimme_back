@@ -7,12 +7,13 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all_with_flag(@current_user,params[:f])
+    @items_decorators = Item.all_with_flag(@current_user,params[:f])
   end
 
   # GET /items/1
   # GET /items/1.json
   def show
+    @item_decorator = ItemDecorator.new(@item)
   end 
 
   # GET /items/new
@@ -97,7 +98,6 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      #byebug
       if flash[:model]
         @item = Item.find(flash[:model]["id"])
         @item.assign_attributes(flash[:model])
