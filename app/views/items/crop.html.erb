@@ -1,0 +1,50 @@
+Crop Image!
+
+<div id="cropbox"></div>
+
+
+<%= form_for @item do |f| %>
+  <% %w[x y w h].each do |attribute| %>
+ 	<%= f.text_field "crop_#{attribute}"%>
+  <% end %>
+
+ <div class="action">
+   <%= f.submit "Crop" %>
+ </div>
+
+
+<% end %>
+
+
+<script> 
+
+  var basic = $("#cropbox").croppie({
+  	viewport: {
+        width: 150,
+        height: 150,
+        type: 'square'
+    },
+     boundary: {
+        width: 600,
+        height: 600
+    },
+
+    update: function(e){
+    	points = e.points;
+    	console.log(e.points)
+    	$('#item_crop_x').val(points[0])
+    	$('#item_crop_y').val(points[1])
+    	$('#item_crop_w').val(points[2])
+    	$('#item_crop_h').val(points[3])
+
+    }
+	});
+
+  basic.croppie('bind', {
+  	url: "<%= @item.image_url(:large) %>",
+    points: [0,0,600,600],
+   
+	});
+
+
+</script>

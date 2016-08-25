@@ -12,6 +12,7 @@
     </div>
   <% end %>
 
+
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
@@ -20,9 +21,13 @@
 
   <div class="field">
     <%= f.label :image %>
-    <%= f.file_field :image, class: 'form-control' %>
+    <%= image_tag(item.image_url(:thumb).to_s) %> <br>
   </div>
 
+  <div class="field">
+    <%= f.label "Change Image" %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
 
   <div class="field">
     <%= f.label :description %>

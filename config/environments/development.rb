@@ -51,9 +51,6 @@ Rails.application.configure do
   host = 'localhost' # Don't use this literally; use your local dev host instead
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 
-  Paperclip.options[:command_path] = "C:\Program Files\ImageMagick"
-
-
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

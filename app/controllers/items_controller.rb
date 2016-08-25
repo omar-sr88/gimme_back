@@ -27,15 +27,17 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    byebug
     #need preparation and saving of GuestUser if its the case
     @item = Item.prepare_for_save(item_params,@current_user)
-
     respond_to do |format|
       if @item.save
+        if params[:item][:image].present?
+          render :crop
+        else
         Notification.send_notification(@item, :create)
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
+        end
       else
         format.html { render :new }
         format.json { render json: @item.errors, status: :unprocessable_entity }
@@ -48,14 +50,17 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
+        if params[:item][:image].present?
+          format.html {render :crop , notice: 'Now, crop your image.' }
+        else
+          format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+          format.json { render :show, status: :ok, location: @item }
+        end
       else
         flash[:error] = "Couldnt update"
         flash[:model] = @item
         flash[:model_errors] = @item.errors
-        format.html { redirect_to :action => :edit }
-        
+        format.html { redirect_to :action => :edit }      
       end
     end
   end
@@ -114,6 +119,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :description, :date_lended, :initial_return_date, :recipient_email, :is_guest ,:guest_recipient, :guest_phone , :image)
+      params.require(:item).permit(:name, :description, :date_lended, :initial_return_date, :recipient_email, :is_guest ,:guest_recipient, :guest_phone , :image, :crop_x, :crop_y, :crop_w, :crop_h)
     end
 end

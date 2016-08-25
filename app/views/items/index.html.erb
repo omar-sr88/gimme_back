@@ -20,7 +20,7 @@
        
       <div class="panel-body">
         <div class="list-img-wrapper">
-          <%= image_tag('no-image', class: 'list-item-img')  %>
+          <%= image_tag(item.image_url(:thumb).to_s, class: 'list-item-img')  %>
         </div>
 
         <div class="list-info-wrapper">

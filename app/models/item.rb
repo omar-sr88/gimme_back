@@ -7,13 +7,20 @@ class Item < ApplicationRecord
     validates  :initial_return_date, presence: true
     validate   :is_range_ok?
 
-    has_attached_file :image, styles: { large: "300x300>", thumb: "150x150>" }, default_url: "/images/:style/missing.png"
-  	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+    after_update :crop_image
+
+	attr_accessor :image
+    mount_uploader :image , ImageUploader
+
+    # has_attached_file :image, styles: { large: "300x300>", thumb: "150x150>" }, default_url: "/images/:style/missing.png"
+  	# validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  	# validates_attachment_file_name :image, matches: [/png\z/, /jpe?g\z/, /gif\z/]
 
 
     scope :open, -> { where(returned: false) }
 	scope :closed, -> { where(returned: true) }
 
+	
 	attr_accessor :days_left
 	attr_accessor :progress
 	attr_accessor :progress_message
@@ -25,6 +32,8 @@ class Item < ApplicationRecord
 	attr_accessor :guest_address
 	attr_accessor :guest_email
 	
+	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
 
 
 	def Item.all_with_flag(user,flag)
@@ -65,6 +74,11 @@ class Item < ApplicationRecord
 	def days_to_return(date1, date2)
   	  (date2.to_date - date1.to_date).to_i
 	end
+
+	def crop_image
+		image.recreate_versions! if crop_x.present?	
+	end
+
 
 
 	def Item.prepare_for_save(item_params,owner)
