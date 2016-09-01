@@ -1,4 +1,6 @@
 class Notification < ApplicationRecord
+  after_create_commit { create_event }
+
   belongs_to :sender,  :class_name => "User" , foreign_key: "sender_id"
   belongs_to :to, :class_name => "User" , foreign_key: "to_id"
 
@@ -14,5 +16,11 @@ class Notification < ApplicationRecord
   	message = @@messages[type] %  [item.recipient.name , item.owner.name , item.name]
   	n = Notification.new(title:  @@titles[type], message: message, sender: item.owner, to: item.recipient)
   	n.save
+  end
+
+  private
+ 
+  def create_event
+    NotificationSenderJob.perform_later self
   end
 end
