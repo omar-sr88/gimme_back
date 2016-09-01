@@ -3,6 +3,7 @@ ENV['SERVER_NAME'] = "localhost:3000"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require "minitest/reporters"
+require 'factory_girl'
 Minitest::Reporters.use!
 
 class ActiveSupport::TestCase

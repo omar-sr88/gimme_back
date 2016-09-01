@@ -8,7 +8,7 @@ class UserTest < ActiveSupport::TestCase
    #following tests of railstutorial.org
 
   def setup
-     @user = User.new(name: "Example User", nick: "exam", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
+    @user = FactoryGirl.build(:user)   
   end
 
   test "should be valid" do
@@ -58,10 +58,14 @@ class UserTest < ActiveSupport::TestCase
     assert_respond_to @user, :owned_items
   end
 
-   test "has received items" do
+  test "has received items" do
     assert_respond_to @user, :received_items
   end
 
+  test "test factory" do
+    factory_user = FactoryGirl.build(:user) 
+    assert factory_user.valid?
+  end
 
 
 end

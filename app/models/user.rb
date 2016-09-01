@@ -11,11 +11,11 @@ class User < ApplicationRecord
   has_many :received_notifications, :class_name => 'Notification', :foreign_key => :to_id
 
 
-	before_save :downcase_email if  self.class.name == 'User'
+	before_save :downcase_email if :user_type
 	before_create :create_activation_digest
 	validates :name, presence: true , length: { maximum: 50 }
 
-  validates :nick, presence: true , length: { minimum: 4 , maximum: 15 }
+  validates :nick, presence: true , length: { minimum: 4 , maximum: 15 } if :user_type
 
 	validates :email, presence: true,
                     allow_blank: false , 

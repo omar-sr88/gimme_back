@@ -72,12 +72,9 @@ class Item < ApplicationRecord
 	  @item.owner_id = owner.id
 	  if item_params[:is_guest] == "1"
 		unless item_params[:guest_recipient].blank?
-		  guest = GuestUser.new(name: item_params[:guest_recipient], email: nil , password:"gimmebackdefault")
-		  guest.save  
-		  uf = UserInfo.new(phone_number: item_params[:guest_phone], contact_email: item_params[:guest_email], address: item_params[:guest_address], user_id: guest.id)
-		  uf.save
+		  guest = GuestUser.create(name: item_params[:guest_recipient], email: nil , password:"gimmebackdefault")
+		  uf = UserInfo.create(phone_number: item_params[:guest_phone], contact_email: item_params[:guest_email], address: item_params[:guest_address], user_id: guest.id)
 		  @item.recipient_id = guest.id
-		  byebug
 		else
 		   @item.errors.add(:recipient,"Guest Recipient needs a name")
 		end
