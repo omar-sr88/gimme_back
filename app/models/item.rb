@@ -2,7 +2,7 @@ class Item < ApplicationRecord
  
 	belongs_to :owner,  :class_name => "User" , foreign_key: "owner_id"
     belongs_to :recipient, :class_name => "User" , foreign_key: "recipient_id"
-    validates  :name, presence: true, length: { maximum: 30 }
+    validates  :name, presence: true, length: { minimum: 4, maximum: 30 }
     validates  :date_lended, presence: true
     validates  :initial_return_date, presence: true
     validate   :is_range_ok?
@@ -21,7 +21,7 @@ class Item < ApplicationRecord
 	scope :closed, -> { where(returned: true) }
 
 	
-	#attr_accessor :days_left, :progress, :progress_message,  :progress_status
+
 	attr_accessor :guest_recipient,:recipient_email,:is_guest,:guest_phone, :guest_address,:guest_email
 	
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
@@ -56,12 +56,10 @@ class Item < ApplicationRecord
       self.owner_id == user.id	
     end
 
+	#Could be PORO?
     def Item.are_users_related?(current, to_display)
-    	Item.where(owner_id: current, recipient_id: to_display).or(Item.where(owner_id: to_display ,recipient_id: current)).pluck(:id).length > 0
+    	!Item.where(owner_id: current, recipient_id: to_display).or(Item.where(owner_id: to_display ,recipient_id: current)).select(:id).first().nil?
     end
-
-
-	
 
 	def crop_image
 		image.recreate_versions! if crop_x.present?	

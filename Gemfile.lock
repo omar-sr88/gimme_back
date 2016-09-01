@@ -71,6 +71,11 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
     faker (1.6.3)
       i18n (~> 0.5)
     ffi (1.9.14-x64-mingw32)
@@ -230,6 +235,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.2)
   coffee-script-source (= 1.8.0)
+  factory_girl_rails
   faker (= 1.6.3)
   font-awesome-rails
   guard (= 2.13.0)
@@ -250,6 +256,9 @@ DEPENDENCIES
   web-console
   will_paginate (= 3.1.0)
   win32console
+
+RUBY VERSION
+   ruby 2.2.5p319
 
 BUNDLED WITH
    1.12.5

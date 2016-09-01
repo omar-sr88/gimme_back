@@ -8,16 +8,16 @@ class UserTest < ActiveSupport::TestCase
    #following tests of railstutorial.org
 
   def setup
-     @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
+     @user = User.new(name: "Example User", nick: "exam", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
-    assert @user.valid?
+    assert @user.valid? , @user.errors.messages
   end
 
   test "email should be present" do
     @user.email = "     "
-    assert_not @user.valid?
+    assert_not @user.valid? , @user.errors.messages
   end
 
  test "name should not be too long" do
@@ -35,7 +35,7 @@ class UserTest < ActiveSupport::TestCase
                          first.last@foo.jp alice+bob@baz.cn]
     valid_addresses.each do |valid_address|
       @user.email = valid_address
-      assert @user.valid?, "#{valid_address.inspect} should be valid"
+      assert @user.valid?, "#{valid_address.inspect} should be valid #{@user.errors.messages}"
     end
   end
 
@@ -52,6 +52,14 @@ class UserTest < ActiveSupport::TestCase
   
   test "authenticated? should return false for a user with nil digest" do
     assert_not @user.authenticated?(:remember, '')
+  end
+
+  test "has lended items" do
+    assert_respond_to @user, :owned_items
+  end
+
+   test "has received items" do
+    assert_respond_to @user, :received_items
   end
 
 

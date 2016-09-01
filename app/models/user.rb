@@ -17,8 +17,11 @@ class User < ApplicationRecord
 
   validates :nick, presence: true , length: { minimum: 4 , maximum: 15 }
 
-	validates :email, presence: true, uniqueness: { case_sensitive: false } , length: { maximum: 50 }  if  self.class.name == 'User'
-	validates :email,   format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }  if  self.class.name == 'User'
+	validates :email, presence: true,
+                    allow_blank: false , 
+                    uniqueness: { case_sensitive: false },
+                    length: { maximum: 50 }  if :user_type
+	validates :email,   format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i } if :user_type
 
 	has_secure_password           
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true 
@@ -103,5 +106,8 @@ class User < ApplicationRecord
       self.activation_digest = User.digest(activation_token)
     end
 
+    def user_type
+      self.class.name == "User"
+    end
 
 end

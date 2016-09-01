@@ -57,6 +57,11 @@ class ItemDecorator
       (date2.to_date - date1.to_date).to_i
   end
 
+   
+  # STATIC CALCULATED AS ATTR ACCESSORS?
+  #
+  #attr_accessor :days_left, :progress, :progress_message,  :progress_status
+  
   # def set_progress
 	 #  total = item.days_to_return(item.date_lended, item.initial_return_date) 
 		# item.days_left = item.days_to_return(Time.now, item.initial_return_date)

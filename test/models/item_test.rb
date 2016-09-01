@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 
   def setup
     @user = User.first
@@ -19,13 +16,50 @@ class ItemTest < ActiveSupport::TestCase
     assert @item.valid?
   end
 
+  test "save empty item" do
+    assert_not Item.new.save()
+  end
+
+  test "name  should be present" do
+    @item.name = nil
+    assert_not @item.valid?
+  end
+
   test "user id should be present" do
     @item.owner_id = nil
     assert_not @item.valid?
   end
 
-  test "save empty item" do
-    assert_not Item.new.save()
+  test "recipient id should be present" do
+    @item.recipient_id = nil
+    assert_not @item.valid?
+  end
+
+  test "name size min" do
+    skip
+  end  
+
+  test "name size max" do
+    skip
+  end  
+
+  test "are users related?" do
+    skip
   end
 	
+  test "item has image" do
+    skip
+
+  end
+
+  test "date landed in the past?" do
+    skip
+
+  end
+
+  test "initial return date post lend date" do
+    skip
+  end
+
+
 end
