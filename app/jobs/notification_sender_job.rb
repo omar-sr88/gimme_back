@@ -2,7 +2,8 @@ class NotificationSenderJob < ApplicationJob
   queue_as :default
 
  def perform(event)
-    ActionCable.server.broadcast 'activity_channel', notification: render_notification(event)
+ 	target_id = event.to.id
+    ActionCable.server.broadcast "activity_channel_#{target_id}", notification: render_notification(event)
   end
  
   private
