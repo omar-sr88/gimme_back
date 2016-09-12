@@ -27,7 +27,7 @@ class ItemDecorator
   def progress
     total = days_to_return(item.date_lended, item.initial_return_date) 
     if days_left > 0
-      (total - item.days_left)*100/total unless total == 0
+      (total - days_left)*100/total unless total == 0
     else
       100
     end
@@ -36,10 +36,10 @@ class ItemDecorator
   def progress_message
     if days_left < 0 
       "Xi jão, te deram o guela!"
-    elsif item.days_left == 0
+    elsif days_left == 0
       "É Hoje! Vai atrás mermão!"
     else
-      "Faltam #{item.days_left} dias"
+      "Faltam #{days_left} dias"
     end    
   end
 
@@ -57,6 +57,10 @@ class ItemDecorator
       (date2.to_date - date1.to_date).to_i
   end
 
+
+  def is_mine?(user)
+    item.is_owned_by?(user)
+  end
    
   # STATIC CALCULATED AS ATTR ACCESSORS?
   #

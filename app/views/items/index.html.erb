@@ -47,8 +47,8 @@
             <%= item.progress_message %>  
             </div>
          </div>
-          <%= link_to 'Edit', edit_item_path(item), :class => "btn btn-sm btn-info" %>
-          <%= link_to 'Peguei de volta!', item_return_path(item) , "method" => "post",:class => "btn btn-sm btn-warning" %>
+          <%= link_to 'Edit', edit_item_path(item.item), :class => "btn btn-sm btn-info" if  item.is_mine?(current_user) %>
+          <%= link_to 'Peguei de volta!', item_return_path(item.item) , "method" => "post",:class => "btn btn-sm btn-warning" %>
         </div>
       </div>
     </div>    

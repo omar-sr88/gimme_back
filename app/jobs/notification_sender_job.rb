@@ -9,7 +9,7 @@ class NotificationSenderJob < ApplicationJob
   private
  
   def render_notification(event)
-    ApplicationController.renderer.render(partial: 'notifications/notification', locals: { notification: event })
+    ApplicationController.renderer.render(partial: 'notifications/nav_notification', locals: { notification: event })
   end
 
 end

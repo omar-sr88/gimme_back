@@ -5,9 +5,12 @@ Crop Image!
 
 <%= form_for @item do |f| %>
   <% %w[x y w h].each do |attribute| %>
- 	<%= f.hidden_field "crop_#{attribute}"%>
+ 	  <%= f.hidden_field "crop_#{attribute}"%>
   <% end %>
-
+  
+  <%= f.text_field :initial_return_date,  :hidden => "true" %>
+  <%= f.text_field :date_lended,  :hidden => "true" %>
+  
  <div class="action">
    <%= f.submit "Crop" %>
  </div>

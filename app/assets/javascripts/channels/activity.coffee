@@ -6,9 +6,10 @@ App.activity = App.cable.subscriptions.create "ActivityChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    # Called when there's incoming data on the websocket for this channel
-    $($('.container-fluid .row div').first()).prepend data['notification']
-    console.log data['notification']
-
+    # Receives the rendered li item, pushes it. Adds one to unseen counter
+    $('.dropdown-menu.message-dropdown').prepend data['notification']
+    prevCount = parseInt($('.badge.badge-notify').text(),10) || 0;
+    $('.badge.badge-notify').text(prevCount+1)
+    
   notify: (message) ->
     @perform 'notify', message: message

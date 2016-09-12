@@ -40,7 +40,6 @@ class Item < ApplicationRecord
 		end
 
 		decorators = ItemDecorator.build_collection(items)
-
 	end
 
 	def is_range_ok?

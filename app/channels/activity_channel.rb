@@ -9,8 +9,7 @@ class ActivityChannel < ApplicationCable::Channel
   end
 
   def notify(data)
-  	#n = Notification.third
-  	#NotificationSenderJob.perform_later n
-  	#n = Notification.create!(title: "test", message: "message", sender: User.second, to: User.first)
+  	n = Notification.third
+  	NotificationSenderJob.perform_later n
   end
 end

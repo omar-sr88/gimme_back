@@ -66,7 +66,7 @@
     <% else %>
       <p>Is your friend in GimmeBack? <span> Check here if he is not <%= f.check_box :is_guest , :id => "ck-recipient", :class => "squaredOne" %></span></p> 
 
-      <%= f.text_field :recipient_id, :class=> "form-control user-search" , :placeholder => "Try finding him by his email..."%>    
+      <%= f.text_field :recipient_id, :class=> "form-control user-search" , :placeholder => "Try finding him by his username..."%>    
       <p>Is he/she on of these?</p>          
       <select id="user-search-results" name="item[recipient_email]" size="5"> </select>
     <% end %>

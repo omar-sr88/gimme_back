@@ -24,7 +24,7 @@
 						  <%= @item.date_lended %>
 						</p>
 
-						<%= link_to 'Edit', edit_item_path(@item) %> |
+						<%= link_to 'Edit  |', edit_item_path(@item) if @item.is_owned_by?(current_user) %>
 						<%= link_to 'Back', items_path %>
 					</div>
 	            </div>		

@@ -23,6 +23,12 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    item = Item.find(params[:id])
+    session[:return_to] ||= request.referer
+    if !item.is_owned_by?(current_user)
+      flash[:error] = "Could not edit item that isnt yours"
+      redirect_to session.delete(:return_to)
+    end
   end
 
   # POST /items
@@ -33,11 +39,11 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         if params[:item][:image].present?
-          render :crop
+          Notification.send_notification(@item, :create)
+          format.html { render :crop }
         else
-        Notification.send_notification(@item, :create)
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
+          format.html { redirect_to @item, notice: 'Item was successfully created.' }
+          format.json { render :show, status: :created, location: @item }
         end
       else
         format.html { render :new }
@@ -48,9 +54,10 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
-  def update
+  def update 
+    #byebug
     respond_to do |format|
-      if @item.update(item_params)
+      if @item.update!(item_params)
         if params[:item][:image].present?
           format.html {render :crop , notice: 'Now, crop your image.' }
         else
