@@ -149,13 +149,6 @@ pt-BR:
       header:
         one: 'Não foi possível gravar %{model}: 1 erro'
         other: 'Não foi possível gravar %{model}: %{count} erros'
-  helpers:
-    select:
-      prompt: Por favor selecione
-    submit:
-      create: Criar %{model}
-      submit: Salvar %{model}
-      update: Atualizar %{model}
   number:
     currency:
       format:
@@ -224,3 +217,77 @@ pt-BR:
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: ''
+  all: Todos
+  mine_menu: Itens emprestados
+  others_menu: Itens recebidos
+  returned_menu: Itens devolvidos
+  notifications: Notificações
+  site_title: DevolveAe!
+  site_subtitle: Todas as coisas emprestadas num só local
+  items_list: Lista de Items
+  items_subtitle: Todos
+  add: Adicionar!
+  with: Com
+  show: Mostrar
+  what_is_it: O que é? Como estava?
+  when:  Quando emprestou/pegou?
+  return_date: Data pra devolver/pegar de volta?
+  edit: Editar
+  got_back: Peguei de volta!
+  got_back_q: Pegou de volta?
+  no_days_left: Corre amigo! Expirou o prazo!
+  current_day_left: "É hoje! Entre em contato"
+  some_days_left: 
+      one: "Falta %{days} dia"
+      other: "Faltam %{days} dias"
+  profile: Perfil
+  log_out: Sair
+  read_notifications: Ver todas as notificações
+  new_item: Novo Item
+  contact_info: Informações para contato
+  personal_info: Informações pessoais
+  joined_in: Cadastrado em
+  update: Atualizar
+  back: Voltar
+  is_on_site: Seu amigo está no DevoveAe? 
+  check_here: Marque aqui se não 
+  find_by_username: Tente achar pelo username...
+  is_on_list: Ele(a) é um desses?
+  still_not: Ainda não está conosco? Coloque o nome dele(a) aqui
+  add_info: Adicione algumas informações de contato
+  phone_number: Telefone
+  address: Endereço
+  contact_email: Email para contato  
+  users:
+    show:
+      name: Nome
+      username: Username
+      phone: Telefone
+      email: Email
+  helpers:
+    select:
+      prompt: Por favor selecione
+    submit:
+      create: Criar %{model}
+      submit: Salvar %{model}
+      update: Atualizar %{model}
+    label:
+      user:
+        name: Nome
+        username: Username
+        phone: Telefone
+        email: Email
+        password: Senha
+        password_confirmation: Confirme senha
+      user_info:
+        phone_number: Telefone
+        address: Endereço
+        contact_email: Email para contato
+      item:
+        name: Nome
+        image: Imagem
+        change_image: Escolher imagem
+        description: Descrição
+        date_lended: Data de espréstimo
+        initial_return_date: Data de devolução
+        recipient: Recipiente

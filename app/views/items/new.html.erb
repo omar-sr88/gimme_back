@@ -1,4 +1,7 @@
-<h1>New Item</h1>
+<% provide(:title, t(:new_item) )%>
+
+
+<h1><%=t(:new_item) %></h1>
 
 <%= render 'form', item: @item %>
 

@@ -25,7 +25,7 @@
   </div>
 
   <div class="field">
-    <%= f.label "Change Image" %>
+    <%= f.label :change_image %>
     <%= f.file_field :image, class: 'form-control' %>
   </div>
 
@@ -64,10 +64,10 @@
     <% if params[:action] == "edit" %>
       <%= link_to @item.recipient.name, @item.recipient , class: 'form-control',:readonly => true %>
     <% else %>
-      <p>Is your friend in GimmeBack? <span> Check here if he is not <%= f.check_box :is_guest , :id => "ck-recipient", :class => "squaredOne" %></span></p> 
+      <p> <%=t(:is_on_site) %> <span> <%=t(:check_here) %> <%= f.check_box :is_guest , :id => "ck-recipient", :class => "squaredOne" %></span></p> 
 
-      <%= f.text_field :recipient_id, :class=> "form-control user-search" , :placeholder => "Try finding him by his username..."%>    
-      <p>Is he/she on of these?</p>          
+      <%= f.text_field :recipient_id, :class=> "form-control user-search" , :placeholder => t(:find_by_username)%>    
+      <p><%=t(:is_on_list) %></p>          
       <select id="user-search-results" name="item[recipient_email]" size="5"> </select>
     <% end %>
   </div>
@@ -75,19 +75,19 @@
   <div class="row guest">
       <div class='col-md-5'>
           <div class="form-group">
-              <%= f.label "Still not with us? No problem put your friends name here " %>
+              <%= f.label t(:still_not) %>
               <div class='input-group'>
                   <%= f.text_field :guest_recipient, :class=> "form-control" %>
               </div>
-              <%= f.label "Add some contact information too!" %>
+              <%= f.label t(:add_info) %>
               <br/>
-              <%= f.label "Phone" %>
+              <%= f.label t(:phone_number) %>
               <%= f.text_field :guest_phone,  :class=> 'form-control' %>
 
-              <%= f.label "Address" %>
+              <%= f.label t(:address) %>
               <%= f.text_field :guest_address, :class=> 'form-control' %>
 
-              <%= f.label "Contact Email" %>
+              <%= f.label t(:contact_email) %>
               <%= f.text_field :guest_email, :class=> 'form-control' %>
           </div>
       </div>
@@ -96,7 +96,7 @@
   <% if params[:action] == "edit" %>
     <div class="row">
           <div class='col-md-5'>
-            <span> Got it back? <%= f.check_box :returned , :id => "ck-tem-back", :class => "squaredOne" %></span>
+            <span><%= t(:got_back_q) %> <%= f.check_box :returned , :id => "ck-tem-back", :class => "squaredOne" %></span>
               <div class="form-group">
                   <div class='input-group date returned-date-h' id='datetimepicker8'>
                       <%= f.text_field :actual_return_date,:value => Date.current().strftime("%d-%m-%Y"), "data-provide" => 'datepicker', :class=> "form-control" %>
@@ -110,7 +110,7 @@
   <% end %>
 
   <div class="actions" >
-    <%= f.submit "Save", class: "btn btn-primary" %>
+    <%= f.submit  class: "btn btn-primary" %>
   </div>
 
 <% end %>

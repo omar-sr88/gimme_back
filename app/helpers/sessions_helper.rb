@@ -54,7 +54,8 @@ module SessionsHelper
 
 
   def set_locale
-    #I18n.locale = 'pt-BR'
+    I18n.locale = request.env["HTTP_ACCEPT_LANGUAGE"].split(',').first || I18n.default_locale
+  
   end
 
   def get_notifications(user)

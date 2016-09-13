@@ -35,11 +35,12 @@ class ItemDecorator
 
   def progress_message
     if days_left < 0 
-      "Xi jão, te deram o guela!"
+       I18n.t :no_days_left
     elsif days_left == 0
-      "É Hoje! Vai atrás mermão!"
+       I18n.t :current_day_left
     else
-      "Faltam #{days_left} dias"
+      I18n.t("some_days_left", :days => days_left, :count => days_left)
+      #{}"Faltam #{days_left} dias"
     end    
   end
 

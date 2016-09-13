@@ -27,3 +27,57 @@ en:
       common: "%m-%d-%Y"
       default: "%m-%d-%Y"
       weird: "arrrrr %d"
+  mine_menu: Items lended
+  others_menu: Items I got
+  returned_menu: Returned Items
+  notifications: Notifications
+  site_title: GimmeBack
+  site_subtitle: All lended things in on place
+  items_list: Items List
+  items_subtitle: All Items
+  add: Add new!
+  with: With
+  show: Show
+  what_is_it: What is it? How was it?
+  when:  When?
+  return_date: Date to return/get back?
+  edit: Edit
+  got_back: Got it back!
+  got_back_q: Got it back?
+  no_days_left: Oh man! Get yo stuff back ASAP!
+  current_day_left: "It´s today, get in contact"
+  some_days_left: 
+    one: "%{days} day left"
+    other: "%{days} days left"
+  profile: Profile
+  log_out: Log out
+  read_notifications: Read all Notifications
+  new_item: New Item
+  contact_info: Contact Info
+  name: name
+  username: username
+  phone: Phone
+  email: Email
+  personal_info: Personal Info
+  joined_in: Joined in
+  update: Update
+  back: Back
+  is_on_site: Is your friend in GimmeBack? 
+  check_here: Check here if he is not 
+  find_by_username: Try finding him by his username...
+  is_on_list: Is he/she on of these?
+  still_not: Still not with us? No problem put your friends name here
+  add_info: Add some contact information too!
+  helpers:
+    label:
+      user:
+        name: Name
+        username: Username
+        phone: Phone
+        email: Email
+        password: Password
+        password_confirmation: Password Confirmation
+      user_info:
+        phone_number: Phone
+        address: Address
+        contact_email: Contact Email

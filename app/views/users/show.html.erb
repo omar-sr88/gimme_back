@@ -8,25 +8,25 @@
 
 <% if current_user.id.to_s == params[:id] %>
 	<div class="page-header">
-	    <h1>Personal Info  <span><%= link_to 'Edit info', edit_user_path(@user) , :class => "btn btn-success" %></span></h1>
+	    <h1><%= t(:personal_info) %>  <span><%= link_to t(:edit) + " Info", edit_user_path(@user) , :class => "btn btn-success" %></span></h1>
 	</div>
 	<div>
 		<%= gravatar_for @user %>
-	  <p>Name: <%= @user.name %></p>
-	  <p>UserName: <%= @user.nick %></p>
-	  <p>Joined in <%= @user.created_at.to_s %></p>
+	  <p><%= t(".name") %>: <%= @user.name %></p>
+	  <p><%= t(".username") %>: <%= @user.nick %></p>
+	  <p><%= t(".joined_in") %> <%= @user.created_at.to_s %></p>
 	</div>
 <% end %>
 
 
 <div class="page-header">
-    <h1>Contact Info</h1>
+    <h1><%= t(:contact_info) %></h1>
 </div>
 <div>
 
-	<p>Name: <%= @user.name %></p>
-	<p>UserName: <%= @user.nick %></p>
-	<p>Phone: <%= @user.info.phone_number if @user.info%> <p>
+	<p><%= t(".name") %>: <%= @user.name %></p>
+	<p><%= t(".username") %>: <%= @user.nick %></p>
+	<p><%= t(".phone") %>: <%= @user.info.phone_number if @user.info%> <p>
 
 </div>
 
